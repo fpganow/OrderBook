@@ -6,11 +6,12 @@ title BATS PITCH Parser
 
 state "Read Sequenced Unit Header" as Rsuh: Read 8 bytes
 state "Read Sequenced Unit Header" as Rsuh: Save Hdr Length
+state "Read Sequenced Unit Header" as Rsuh: Hdr Length = (msg_buffer[0] << 8 | msg_buffer[1])
 Rsuh --> Rmsg : Read 2 bytes
 
 
-state "Read Message Type and Length" as Rmsg: length <= msg_buffer[0]
-state "Read Message Type and Length" as Rmsg: Message Type <= msg_buffer[1]
+state "Read Message Type and Length" as Rmsg: Message Length = msg_buffer[0]
+state "Read Message Type and Length" as Rmsg: Message Type = msg_buffer[1]
 Rmsg --> Read_Time
 Read_Time --> Save_Time
 Save_Time -> Rmsg
@@ -28,6 +29,9 @@ Read_Delete_Order --> SOO
 SOO -> Rmsg
 
 state "Read Time" as Read_Time: seconds since midnight (4 bytes)
+state "Read Time" as Read_Time: Time = (msg_buffer[0] << 24) | (msg_buffer[1] << 16) |
+state "Read Time" as Read_Time:     (msg_buffer[2] << 8) | (msg_buffer[3])
+
 state "Read Add Order" as Read_Add_Order: 3 sub-types
 state "Read Add Order" as Read_Add_Order: Add Order (long)
 state "Read Add Order" as Read_Add_Order: Add Order (short)
