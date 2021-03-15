@@ -1,4 +1,4 @@
-@startuml
+@startuml BATS_Pitch_Parser
 
 title BATS PITCH Parser 
 
@@ -52,6 +52,7 @@ state "Read Modify Order" as Read_Modify_Order: Modify (long)
 state "Save/Reset Time" as Save_Time: Reset clock
 state "Send to Order Book" as SOO: Send normalized format to Order Book
 
+SOO --> [*]
 
 'state ProcessingTask {
 '  [*] --> long1
