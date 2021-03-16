@@ -1,0 +1,30 @@
+                                                                                                                      ,------.                                                                
+                                                                                                                      |*start|                                                                
+                                                                                                                      |------|                                                                
+                                                                                                                      `------'                                                                
+                                                                                                                          |                                                                   
+                                                                                                                          |                                                                   
+                                                                                                 ,-------------------------------------------------.                                          
+                                                                                                 |Read Sequenced Unit Header                       |                                          
+                                                                                                 |-------------------------------------------------|                                          
+                                                                                                 |Read 8 bytes                                     |                                          
+                                                                                                 |Save Hdr Length                                  |                                          
+                                                                                                 |Hdr Length = (msg_buffer[0] << 8 | msg_buffer[1])|                                          
+                                                                                                 `-------------------------------------------------'                                          
+                                                                  --------------------------------------                  |                                                                   
+                                                                                                          ,------------------------------.                                                    
+                                ,---------------.                 ,------------------------------------.  |Read Message Type and Length  |                                                    
+                                |Save/Reset Time|                 |Send to Order Book                  |  |------------------------------|                                                    
+                                |---------------|                 |------------------------------------|--|Message Length = msg_buffer[0]|                                                    
+                                |Reset clock    |                 |Send normalized format to Order Book|  |Message Type = msg_buffer[1]  |                                                    
+                                `---------------'                 `------------------------------------'  `------------------------------'                                                    
+                                                                                                                          |                                                                   
+                                                                                                                          |                                                                   
+,------------------------------------------------------.           ,-------------------.   ,-----------------.            |            ,--------------------.   ,----------------------------.
+|Read Time                                             |           |Read Reduce Size   |   |Read Modify Order|                         |Read Add Order      |   |Read Order Executed         |
+|------------------------------------------------------|  ,----.   |-------------------|   |-----------------|   ,-----------------.   |--------------------|   |----------------------------|
+|seconds since midnight (4 bytes)                      |  |*end|   |2 sub-types        |   |2 sub-types      |   |Read_Delete_Order|   |3 sub-types         |   |2 sub-types                 |
+|Time = (msg_buffer[0] << 24) | (msg_buffer[1] << 16) ||  |----|   |Reduce Size (short)|   |Modify (short)   |   |-----------------|   |Add Order (long)    |   |Order Executed              |
+|(msg_buffer[2] << 8) | (msg_buffer[3])                |  `----'   |Reduce Size (long) |   |Modify (long)    |   `-----------------'   |Add Order (short)   |   |Order Executed at Price/Size|
+`------------------------------------------------------'           `-------------------'   `-----------------'                         |Add Order (expanded)|   `----------------------------'
+                                                                                                                                       `--------------------'                                 

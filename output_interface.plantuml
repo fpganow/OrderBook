@@ -1,0 +1,17 @@
+@startuml Output.Interface
+skinparam titleFontSize 24
+title
+**NiFpgaIPWrapper_bats_parser_ip (Output Interface)**
+<#lightskyblue>|=  Direction |= Data Type |= Signal Name               |
+<#lightgreen>|=  in       |= Boolean   |= Ready_for_OrderBook_Command  |
+<#darkgreen>|<color:white>  out      |<color:white> Boolean   |<color:white> OrderBook_Command_Valid |
+<#darkgreen>|<color:white>  out      |<color:white> U16       |<color:white> OrderBook_Command |
+<#darkgreen>|<color:white>  out      |<color:white> U8        |<color:white> Side|
+<#darkgreen>|<color:white>  out      |<color:white> U32       |<color:white> Quantity|
+<#darkgreen>|<color:white>  out      |<color:white> U32       |<color:white> Executed_Quantity|
+<#darkgreen>|<color:white>  out      |<color:white> U32       |<color:white> Cancelled_Quantity|
+<#darkgreen>|<color:white>  out      |<color:white> U64       |<color:white> Price|
+<#darkgreen>|<color:white>  out      |<color:white> U64       |<color:white> Symbol|
+<#darkgreen>|<color:white>  out      |<color:white> U64       |<color:white> Order_Id|
+end title
+@enduml

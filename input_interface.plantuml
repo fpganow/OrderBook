@@ -1,0 +1,11 @@
+@startuml Input.Interface
+skinparam titleFontSize 24
+title
+**NiFpgaIPWrapper_bats_parser_ip (Input Interface)**
+<#lightskyblue>|=  Direction |= Data Type |= Signal Name |
+<#lightgreen>|=  in       |= U8        |= Data        |
+<#lightgreen>|=  in       |= Boolean   |= Data_Valid  |
+<#lightgreen>|=  in       |= Boolean   |= Reset |
+<#darkgreen>|<color:white>  out      |<color:white> Boolean   |<color:white> Ready_For_Udp_Input|
+end title
+@enduml
