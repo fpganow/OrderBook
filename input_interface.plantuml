@@ -1,5 +1,5 @@
 @startuml Input.Interface
-skinparam titleFontSize 24
+skinparam titleFontSize 18 
 title
 **NiFpgaIPWrapper_bats_parser_ip (Input Interface)**
 <#lightskyblue>|=  Direction |= Data Type |= Signal Name |
