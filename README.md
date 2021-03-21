@@ -1,6 +1,9 @@
 # arty_bats
 Parse and Normalize BATS Multicast PITCH data using LabVIEW FPGA and the Arty Artix-7 A100T Board
 
+# For Updated Information see:
+https://fpganow.com/index.php/parse-bats-messages-in-an-fpga/
+
 # High Level Diagram
 ![High Level Diagram](out/High_Level/High_Level.png)
 

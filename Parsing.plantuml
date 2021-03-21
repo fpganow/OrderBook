@@ -1,0 +1,47 @@
+@startuml High_Level
+
+
+
+state "ReadMsgType" as ReadMsgType
+
+state "AddOrder" as AO
+state "OrderExecuted" as OE
+state "ReduceSize" as RS
+state "ModifyOrder" as MO
+state "DeleteOrder" as DO
+
+state "AddOrder (long)" as AO_Long
+state "AddOrder (short)" as AO_Short
+state "AddOrder (expanded)" as AO_Exp
+
+state "OrderExecuted (regular)" as OE_Reg
+state "OrderExecuted (at_price)" as OE_At_Price
+
+state "ReduceSize (long)" as RS_Long
+state "ReduceSize (short)" as RS_Short
+
+state "ModifyOrder (long)" as MO_Long
+state "ModifyOrder (short)" as MO_Short
+
+[*] --> ReadMsgType
+
+ReadMsgType --> AO
+ReadMsgType --> OE
+ReadMsgType --> RS
+ReadMsgType --> MO
+ReadMsgType --> DO
+
+AO --> AO_Long
+AO --> AO_Short
+AO --> AO_Exp
+
+OE --> OE_Reg
+OE --> OE_At_Price
+
+RS --> RS_Long
+RS --> RS_Short
+
+MO --> MO_Long
+MO --> MO_Short
+
+@enduml

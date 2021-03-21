@@ -1,0 +1,23 @@
+@startuml Part Two
+
+title Part 2: BATS Parser/Normalizer
+
+skinparam handwritten true
+left to right direction
+
+skinparam cloud {
+    handwritten false
+}
+
+' inputs
+'  Normalized OrderBook Message
+' Outputs:
+'   Write response to buffer (if required)
+
+cloud Ethernet
+node Udp
+
+Ethernet --> Udp
+Udp --> ITCH
+
+@enduml

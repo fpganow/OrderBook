@@ -1,0 +1,22 @@
+@startuml Part One
+
+title Part 1: Udp/Ip Parser
+
+skinparam handwritten true
+left to right direction
+
+' Ethernet Data is in the form of:
+' MII
+' GMII
+' SGMII
+skinparam cloud {
+    handwritten false
+}
+
+cloud Ethernet
+node Udp
+
+Ethernet --> Udp
+Udp --> ITCH
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml Part Two
+
+title Part 2: BATS Parser/Normalizer
+
+skinparam handwritten true
+left to right direction
+
+skinparam cloud {
+    handwritten false
+}
+
+' BATS/NASDAQ
+' PITCH/ITCH
+' data is in the form of:
+'   one byte per cycle
+'   eight bytes per cycle
+
+cloud Ethernet
+node Udp
+
+Ethernet --> Udp
+Udp --> ITCH
+
+@enduml

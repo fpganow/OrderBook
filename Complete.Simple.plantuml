@@ -1,0 +1,32 @@
+@startuml High_Level (Simple)
+
+title High Level (Simple)
+
+skinparam handwritten true
+'skinparam monochrome reverse
+left to right direction
+'top to bottom direction
+
+skinparam cloud {
+    handwritten false
+}
+
+cloud Ethernet
+node Udp
+node ITCH 
+node PITCH
+node OrderBook
+database Memory
+rectangle UserCommand 
+actor User
+
+Ethernet --> Udp
+Udp --> ITCH
+Udp --> PITCH
+ITCH --> OrderBook
+PITCH --> OrderBook
+OrderBook <-> Memory
+OrderBook <--> UserCommand
+User <-> UserCommand
+
+@enduml
