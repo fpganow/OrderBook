@@ -5,7 +5,7 @@ Parse and Normalize BATS Multicast PITCH data using LabVIEW FPGA and the Arty Ar
 ![High Level Diagram](out/High_Level/High_Level.png)
 
 # State Machine for BATS PITCH Parser
-![BATS PITCH Parser](out/BATS_PITCH_PARSER/BATS_PITCH_Parser.png)
+![BATS PITCH Parser](out/BATS_PITCH_PARSER/BATS_Pitch_Parser.png)
 
 # Input interface for BATS Multicast PITCH Parser block
 ![Input Interface](out/input_interface/Input.Interface.png)
