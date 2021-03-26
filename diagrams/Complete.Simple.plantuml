@@ -18,7 +18,7 @@ node PITCH
 node OrderBook
 database Memory
 rectangle UserCommand 
-actor User
+actor "App Request" as App
 
 Ethernet --> Udp
 Udp --> ITCH
@@ -27,6 +27,6 @@ ITCH --> OrderBook
 PITCH --> OrderBook
 OrderBook <-> Memory
 OrderBook <--> UserCommand
-User <-> UserCommand
+App <-> UserCommand
 
 @enduml

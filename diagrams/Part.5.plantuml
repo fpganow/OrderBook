@@ -1,6 +1,6 @@
-@startuml Part 4: Order Book
+@startuml Part 5: Application
 
-title Part 4: Order Book
+title Part 5: Application
 
 skinparam handwritten true
 left to right direction
@@ -9,11 +9,11 @@ skinparam cloud {
     handwritten false
 }
 
-cloud "Normalized Messages" as Normalized
+actor "App Request" as App
 node "Order Book Processor" as OrderBook
 database "Block RAM" as Memory
 
-Normalized --> OrderBook
+App --> OrderBook
 OrderBook -> Memory
 
 @enduml
