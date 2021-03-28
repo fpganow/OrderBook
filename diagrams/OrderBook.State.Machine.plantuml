@@ -1,0 +1,64 @@
+@startuml OrderBook State Machine
+
+title OrderBook State Machine
+
+state "Reset" as Reset
+'[*] --> Rsuh
+
+'state "Read Sequenced Unit Header" as Rsuh: Read 8 bytes
+'state "Read Sequenced Unit Header" as Rsuh: Save Hdr Length
+'state "Read Sequenced Unit Header" as Rsuh: Hdr Length = (msg_buffer[0] << 8 | msg_buffer[1])
+'Rsuh --> Rmsg : Read 2 bytes
+
+/'
+state "Read Message Type and Length" as Rmsg: Message Length = msg_buffer[0]
+state "Read Message Type and Length" as Rmsg: Message Type = msg_buffer[1]
+Rmsg --> Read_Time
+Read_Time --> Save_Time
+Save_Time -> Rmsg
+Rmsg --> Read_Add_Order
+Read_Add_Order --> SOO
+Rmsg --> Read_Order_Executed
+Read_Order_Executed --> SOO
+Rmsg --> Read_Reduce_Size
+Read_Reduce_Size --> SOO
+Rmsg --> Read_Modify_Order
+Read_Modify_Order --> SOO
+Rmsg --> Read_Delete_Order
+Read_Delete_Order --> SOO
+
+SOO -> Rmsg
+
+state "Read Time" as Read_Time: seconds since midnight (4 bytes)
+state "Read Time" as Read_Time: Time = (msg_buffer[0] << 24) | (msg_buffer[1] << 16) |
+state "Read Time" as Read_Time:     (msg_buffer[2] << 8) | (msg_buffer[3])
+
+state "Read Add Order" as Read_Add_Order: 3 sub-types
+state "Read Add Order" as Read_Add_Order: Add Order (long)
+state "Read Add Order" as Read_Add_Order: Add Order (short)
+state "Read Add Order" as Read_Add_Order: Add Order (expanded)
+
+state "Read Order Executed" as Read_Order_Executed: 2 sub-types
+state "Read Order Executed" as Read_Order_Executed: Order Executed 
+state "Read Order Executed" as Read_Order_Executed: Order Executed at Price/Size
+
+state "Read Reduce Size" as Read_Reduce_Size: 2 sub-types
+state "Read Reduce Size" as Read_Reduce_Size: Reduce Size (short)
+state "Read Reduce Size" as Read_Reduce_Size: Reduce Size (long)
+
+state "Read Modify Order" as Read_Modify_Order: 2 sub-types
+state "Read Modify Order" as Read_Modify_Order: Modify (short)
+state "Read Modify Order" as Read_Modify_Order: Modify (long)
+
+state "Save/Reset Time" as Save_Time: Reset clock
+state "Send to Order Book" as SOO: Send normalized format to Order Book
+
+SOO --> [*]
+'/
+
+'state ProcessingTask {
+'  [*] --> long1
+'  long1 --> ProcessData : Enough Data
+'}
+'ProcessingTask -> [*]
+@enduml
