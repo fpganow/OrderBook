@@ -2,8 +2,27 @@
 
 title OrderBook State Machine
 
+/'
+Input Signals
+  OrderBook.Command
+  Reset
+  OrderBook.Command.Valid
+  Ready.For.OrderBook.Result
+Output Signals
+  OrderBook.Result
+  OrderBook.Result.Valid
+  Ready.For.OrderBook.Command
+Signals
+'/
+
 state "Reset" as Reset
-'[*] --> Rsuh
+state "Wait for Command" as Wait
+state "Add Order" as Add_Order
+
+
+
+[*] --> Reset
+Reset --> Wait
 
 'state "Read Sequenced Unit Header" as Rsuh: Read 8 bytes
 'state "Read Sequenced Unit Header" as Rsuh: Save Hdr Length

@@ -1,6 +1,6 @@
-@startuml BATS_Pitch_Parser
+@startuml BATS Parser State Machine
 
-title BATS PITCH Parser 
+title BATS Parser State Machine
 
 [*] --> Rsuh
 
