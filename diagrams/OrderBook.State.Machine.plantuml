@@ -15,15 +15,25 @@ Output Signals
 Signals
 '/
 
-state "Reset" as Reset
-state "Wait for Command" as Wait
-state "Add Order" as Add_Order
+state "Reset" as Reset: Reset OrderBook.Command
+state "Reset" as Reset: Reset OrderBook.Variables
+state "Reset" as Reset: Reset OrderBook.Variables.Entry
+state "Wait for Command" as Wait: if OrderBook.Command.Valid
+state "Wait for Command" as Wait: --OrderBook.Variables.Address = 999
+state "Wait for Command" as Wait: --OrderBook.State = OrderBook.Command.Type
+state "Wait for Command" as Wait: else
+state "Wait for Command" as Wait: --OrderBook.State = Wait for Command
+state "Add Order" as Add_Order: if Number.of.Elements == 0
+state "Add Order" as Add_Order: --OrderBook.Memory.State = Write
+state "Add Order" as Add_Order: else
+state "Add Order" as Add_Order: --OrderBook.Memory.State = Request.Data
+
 
 
 
 [*] --> Reset
 Reset --> Wait
-
+Wait --> Add_Order
 'state "Read Sequenced Unit Header" as Rsuh: Read 8 bytes
 'state "Read Sequenced Unit Header" as Rsuh: Save Hdr Length
 'state "Read Sequenced Unit Header" as Rsuh: Hdr Length = (msg_buffer[0] << 8 | msg_buffer[1])
