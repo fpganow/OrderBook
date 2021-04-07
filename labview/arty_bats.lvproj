@@ -15,42 +15,33 @@
 			<Item Name="bats.parser" Type="Folder">
 				<Item Name="host.bats.parser.tester.vi" Type="VI" URL="../host/bats.parser/host.bats.parser.tester.vi"/>
 				<Item Name="hosts.deserialize.orderbook.commands.vi" Type="VI" URL="../host/bats.parser/hosts.deserialize.orderbook.commands.vi"/>
+				<Item Name="raw.pitch.dat" Type="Document" URL="../host/bats.parser/raw.pitch.dat"/>
 			</Item>
 			<Item Name="orderbook" Type="Folder">
-				<Item Name="tests" Type="Folder"/>
-				<Item Name="orderbook.test.runner.vi" Type="VI" URL="../host/orderbook/orderbook.test.runner.vi"/>
-				<Item Name="orderbook.test.1.vi" Type="VI" URL="../host/orderbook/orderbook.test.1.vi"/>
-				<Item Name="orderbook.test.2.vi" Type="VI" URL="../host/orderbook/orderbook.test.2.vi"/>
-				<Item Name="orderbook.test.3.vi" Type="VI" URL="../host/orderbook/orderbook.test.3.vi"/>
-				<Item Name="orderbook.test.4.vi" Type="VI" URL="../host/orderbook/orderbook.test.4.vi"/>
+				<Item Name="tests" Type="Folder">
+					<Item Name="orderbook.test.1.vi" Type="VI" URL="../host/orderbook/tests/orderbook.test.1.vi"/>
+					<Item Name="orderbook.test.2.vi" Type="VI" URL="../host/orderbook/tests/orderbook.test.2.vi"/>
+					<Item Name="orderbook.test.3.vi" Type="VI" URL="../host/orderbook/tests/orderbook.test.3.vi"/>
+					<Item Name="orderbook.test.4.vi" Type="VI" URL="../host/orderbook/tests/orderbook.test.4.vi"/>
+				</Item>
 				<Item Name="host.orderbook.tester.vi" Type="VI" URL="../host/orderbook/host.orderbook.tester.vi"/>
 				<Item Name="hosts.deserialize.orderbook.entries.vi" Type="VI" URL="../host/orderbook/hosts.deserialize.orderbook.entries.vi"/>
-				<Item Name="vi.under.test.vi" Type="VI" URL="../host/orderbook/vi.under.test.vi"/>
-				<Item Name="Untitled.lvtest" Type="TestItem" URL="../Untitled.lvtest">
-					<Property Name="utf.test.bind" Type="Str">vi.under.test.vi</Property>
-					<Property Name="utf.vector.test.bind" Type="Str">C2CC0A72-9D7B-8823-4189-59A1EE66A364</Property>
-				</Item>
-				<Item Name="Untitled.lvvect" Type="TestVectorItem" URL="../Untitled.lvvect">
-					<Property Name="utf.vector.test.bind" Type="Str">C2CC0A72-9D7B-8823-4189-59A1EE66A364</Property>
-				</Item>
+				<Item Name="orderbook.test.runner.vi" Type="VI" URL="../host/orderbook/orderbook.test.runner.vi"/>
+				<Item Name="test.orderbook.vi" Type="VI" URL="../host/orderbook/test.orderbook.vi"/>
 			</Item>
 			<Item Name="read.raw.file.vi" Type="VI" URL="../host/read.raw.file.vi"/>
+			<Item Name="test.run.all.vi" Type="VI" URL="../host/test.run.all.vi"/>
 		</Item>
-		<Item Name="Host.Test.vi" Type="VI" URL="../Test/Host.Test.vi"/>
 		<Item Name="Read.Pcap.File.vi" Type="VI" URL="../Test/Read.Pcap.File.vi"/>
 		<Item Name="Global.Header.ctl" Type="VI" URL="../Test/Global.Header.ctl"/>
 		<Item Name="record.ctl" Type="VI" URL="../Test/record.ctl"/>
 		<Item Name="host.conv.str.to.hex.vi" Type="VI" URL="../Test/host.conv.str.to.hex.vi"/>
 		<Item Name="Read.PITCH.File.vi" Type="VI" URL="../Test/Read.PITCH.File.vi"/>
-		<Item Name="sandbox.vi" Type="VI" URL="../arty/sandbox.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="whitespace.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/whitespace.ctl"/>
 				<Item Name="Trim Whitespace.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace.vi"/>
 				<Item Name="Error Cluster From Error Code.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Error Cluster From Error Code.vi"/>
-			</Item>
-			<Item Name="instr.lib" Type="Folder">
-				<Item Name="niInstr Network Types v1.lvlib" Type="Library" URL="/&lt;instrlib&gt;/_niInstr/Network/Types/v1/niInstr Network Types v1.lvlib"/>
 			</Item>
 			<Item Name="NiFpgaLv.dll" Type="Document" URL="NiFpgaLv.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
