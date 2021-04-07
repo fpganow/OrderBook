@@ -17,18 +17,21 @@
 				<Item Name="hosts.deserialize.orderbook.commands.vi" Type="VI" URL="../host/bats.parser/hosts.deserialize.orderbook.commands.vi"/>
 			</Item>
 			<Item Name="orderbook" Type="Folder">
-				<Item Name="orderbook.test.1.old.vi" Type="VI" URL="../host/orderbook/orderbook.test.1.old.vi"/>
+				<Item Name="tests" Type="Folder"/>
+				<Item Name="orderbook.test.runner.vi" Type="VI" URL="../host/orderbook/orderbook.test.runner.vi"/>
 				<Item Name="orderbook.test.1.vi" Type="VI" URL="../host/orderbook/orderbook.test.1.vi"/>
 				<Item Name="orderbook.test.2.vi" Type="VI" URL="../host/orderbook/orderbook.test.2.vi"/>
 				<Item Name="orderbook.test.3.vi" Type="VI" URL="../host/orderbook/orderbook.test.3.vi"/>
+				<Item Name="orderbook.test.4.vi" Type="VI" URL="../host/orderbook/orderbook.test.4.vi"/>
 				<Item Name="host.orderbook.tester.vi" Type="VI" URL="../host/orderbook/host.orderbook.tester.vi"/>
 				<Item Name="hosts.deserialize.orderbook.entries.vi" Type="VI" URL="../host/orderbook/hosts.deserialize.orderbook.entries.vi"/>
+				<Item Name="vi.under.test.vi" Type="VI" URL="../host/orderbook/vi.under.test.vi"/>
 				<Item Name="Untitled.lvtest" Type="TestItem" URL="../Untitled.lvtest">
-					<Property Name="utf.test.bind" Type="Str">host.orderbook.tester.vi</Property>
-					<Property Name="utf.vector.test.bind" Type="Str">1E9149FA-78CD-4C7F-D3D1-E7B536B1A242</Property>
+					<Property Name="utf.test.bind" Type="Str">vi.under.test.vi</Property>
+					<Property Name="utf.vector.test.bind" Type="Str">C2CC0A72-9D7B-8823-4189-59A1EE66A364</Property>
 				</Item>
 				<Item Name="Untitled.lvvect" Type="TestVectorItem" URL="../Untitled.lvvect">
-					<Property Name="utf.vector.test.bind" Type="Str">1E9149FA-78CD-4C7F-D3D1-E7B536B1A242</Property>
+					<Property Name="utf.vector.test.bind" Type="Str">C2CC0A72-9D7B-8823-4189-59A1EE66A364</Property>
 				</Item>
 			</Item>
 			<Item Name="read.raw.file.vi" Type="VI" URL="../host/read.raw.file.vi"/>
