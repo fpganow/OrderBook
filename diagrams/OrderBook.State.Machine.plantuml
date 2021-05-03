@@ -16,24 +16,42 @@ Signals
 '/
 
 state "Reset" as Reset: Reset OrderBook.Command
-state "Reset" as Reset: Reset OrderBook.Variables
-state "Reset" as Reset: Reset OrderBook.Variables.Entry
-state "Wait for Command" as Wait: if OrderBook.Command.Valid
-state "Wait for Command" as Wait: --OrderBook.Variables.Address = 999
-state "Wait for Command" as Wait: --OrderBook.State = OrderBook.Command.Type
-state "Wait for Command" as Wait: else
-state "Wait for Command" as Wait: --OrderBook.State = Wait for Command
-state "Add Order" as Add_Order: if Number.of.Elements == 0
-state "Add Order" as Add_Order: --OrderBook.Memory.State = Write
-state "Add Order" as Add_Order: else
-state "Add Order" as Add_Order: --OrderBook.Memory.State = Request.Data
+state "Reset" as Reset: Reset OrderBook.Category.2
+state "Reset" as Reset: Reset OrderBook.Category.3
+state "Reset" as Reset: Reset OrderBook.Category.4
+state "Wait" as Wait: if OrderBook.Command.Valid
+state "Wait" as Wait: --OrderBook.Variables.Address = 999
+state "Wait" as Wait: --OrderBook.State = OrderBook.Command.Type
+state "Wait" as Wait: else
+state "Wait" as Wait: --OrderBook.State = Wait for Command
+state "Get All Orders" as Get.All.Orders:
+state "GetTop" as Get.Top:
+state "Add Order" as Add.Order: if Number.of.Elements == 0
+state "Add Order" as Add.Order: --OrderBook.Memory.State = Write
+state "Add Order" as Add.Order: else
+state "Add Order" as Add.Order: --OrderBook.Memory.State = Request.Data
+state "Order Executed" as Order.Executed:
+state "Modify Order" as Modify.Order:
+state "Reduce Size" as Reduce.Size:
+state "Delete Order" as Delete.Order:
 
-
+state "New Request" as New.Request:
+state "Request Data" as Request.Data:
+state "Append Data" as Append.Data:
+state "Write to Memory" as Write.Memory:
+state "Requet Memory" as Request.Mmory:
 
 
 [*] --> Reset
 Reset --> Wait
-Wait --> Add_Order
+Wait --> Get.All.Orders
+Wait --> Get.Top
+Wait --> Add.Order
+Add.Order --> Write.Memory
+Wait --> Order.Executed
+Wait --> Modify.Order
+Wait --> Reduce.Size
+Wait --> Delete.Order
 'state "Read Sequenced Unit Header" as Rsuh: Read 8 bytes
 'state "Read Sequenced Unit Header" as Rsuh: Save Hdr Length
 'state "Read Sequenced Unit Header" as Rsuh: Hdr Length = (msg_buffer[0] << 8 | msg_buffer[1])
