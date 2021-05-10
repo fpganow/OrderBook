@@ -9,11 +9,14 @@ skinparam cloud {
     handwritten false
 }
 
-cloud "Normalized Messages" as Normalized
-node "Order Book Processor" as OrderBook
-database "Block RAM" as Memory
+state "BATS Normalizer" as BATS
+state "NASDAQ Normalizer" as NASDAQ
+state "Normalized Messages" as Normalized
+'node "Order Book Processor" as OrderBook
+'node OrderBook
+'database "Block RAM" as Memory
 
-Normalized --> OrderBook
-OrderBook -> Memory
+'Normalized --> OrderBook
+'OrderBook -> Memory
 
 @enduml
