@@ -10,10 +10,12 @@ skinparam cloud {
 }
 
 actor "App Request" as App
-node "Order Book Processor" as OrderBook
+node "Arbitrator" as Arbitrator
+node "Order Book" as OrderBook
 database "Block RAM" as Memory
 
-App --> OrderBook
+Arbitrator <-- App
+Arbitrator -> OrderBook
 OrderBook -> Memory
 
 @enduml

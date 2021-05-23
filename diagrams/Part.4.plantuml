@@ -1,6 +1,6 @@
 @startuml Part 4: Order Book
 
-title Part 4: Order Book
+'title Part 4: Order Book
 
 skinparam handwritten true
 left to right direction
@@ -9,14 +9,26 @@ skinparam cloud {
     handwritten false
 }
 
-state "BATS Normalizer" as BATS
-state "NASDAQ Normalizer" as NASDAQ
-state "Normalized Messages" as Normalized
-'node "Order Book Processor" as OrderBook
-'node OrderBook
-'database "Block RAM" as Memory
 
-'Normalized --> OrderBook
-'OrderBook -> Memory
+node "BATS Normalizer" as BATS
+node "NASDAQ Normalizer" as NASDAQ
+node "Arbitrator" as Arbitrator
+
+actor "User App 0" as App0
+actor "User App 1" as App1
+
+node "Results Listener" as Results
+node "OrderBook" as OrderBook #FF0000
+
+database "Block RAM" as Memory
+
+BATS --> Arbitrator: Command
+NASDAQ --> Arbitrator: Command
+Arbitrator <-- App0: Command
+Arbitrator <-- App1: Command
+Arbitrator -> OrderBook: Command
+
+OrderBook --> Results: Result
+OrderBook <-> Memory
 
 @enduml
