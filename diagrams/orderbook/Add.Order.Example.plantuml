@@ -1,0 +1,11 @@
+@startuml Add.Order.Example
+
+' State Diagram
+' https://plantuml.com/state-diagram
+' https://plantuml.com/activity-diagram-legacy
+title Add.Order.Example
+
+state "OrderBook - Inputs" as OrderBook: [in] Command
+state "OrderBook - Inputs" as OrderBook: - Command.Type
+
+@enduml
