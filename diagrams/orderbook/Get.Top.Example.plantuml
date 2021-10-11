@@ -1,0 +1,23 @@
+@startuml Get.Top.Example
+
+title Get.Top.Example
+
+state "Is Ready For Command True?" as ready.for.command
+state "Set Command Signals" as setup.command
+state "Is Result.Valid True?" as is.result.valid
+state "Read Results" as read.results
+state "Set Command.Valid to False" as set.valid: Set Command.Valid <= False
+
+
+[*] --> ready.for.command
+ready.for.command --> ready.for.command : No
+ready.for.command --> setup.command : Yes
+
+setup.command -> is.result.valid
+is.result.valid --> is.result.valid: No
+is.result.valid --> read.results : Yes
+
+read.results -> set.valid
+set.valid --> [*]
+
+@enduml
