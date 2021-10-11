@@ -54,6 +54,7 @@ module orderbook_tb;
 //    wire [63:0] order_id;
 //    wire [7:0] side;
 
+    
 //    NiFpgaIPWrapper_orderbook UUT (
 //		.reset(0),
 //        .enable_in(1),
@@ -73,8 +74,40 @@ module orderbook_tb;
 //    integer fptr;
 //    integer scan_faults;
 
-//    initial
-//    begin
+    reg [5:0]large_variable;
+    reg [1:0] left_side;
+    reg [3:0] right_side;
+    
+    reg [7:0]command_type;
+    reg [7:0] side;
+    reg [63:0] order_id;
+    reg [31:0]quantity;
+    reg [63:0]symbol;
+    reg [63:0]price;
+    reg [31:0]executed_quantity;
+    reg [31:0]cancelled_quantity;
+    
+    initial
+    begin
+        left_side <= 2'b10;
+        right_side <= 4'b1000;
+//        large_variable = {2'b11, 4'b1111};
+
+        #(duty_cycle * 2);
+        // Join 2 variables
+        large_variable = {left_side, right_side};
+
+// TODO: Is the order of each command correct? I think I remember a case where it was not...
+// OrderBook.Command
+// CommandType = {AddOrder, OrderExecuted, ReduceSize, ModifyOrder, DeleteOrder, Get.All.Orders, Get.Top}
+// Side (U8) 
+// Order Id (U64)
+// Quantity (U32)
+// Symbool (U64)
+// Price (U64)
+// Executed Quantity (U32)
+// Cancelled Quantity (U32)
+
 //        fptr = $fopen("raw.pitch.dat", "rb");
 //        if(fptr == 0)
 //        begin
@@ -91,6 +124,6 @@ module orderbook_tb;
 //        $fclose(fptr); // Close file before finish
 
 //        $finish;
-//    end
+    end
 
 endmodule
