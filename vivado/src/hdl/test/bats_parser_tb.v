@@ -59,20 +59,20 @@ module bats_parser_tb;
         .enable_in(1),
         .enable_out(),
         .enable_clr(0),
-        .ctrlind_00_Ready_for_OrderBook_Command(1),
-        .ctrlind_01_OrderBook_Command_Valid(orderbook_command_valid), // out std_logic_vector(0 downto 0);
-        .ctrlind_02_Cancelled_Quantity_U32(cancelled_quantity),       // out std_logic_vector(31 downto 0);
-        .ctrlind_03_Executed_Quantity_U32(executed_quantity),         // out std_logic_vector(31 downto 0);
-        .ctrlind_04_Price_U64(price),                                 // out std_logic_vector(63 downto 0);
-        .ctrlind_05_Symbol_U64(symbol),                               // out std_logic_vector(63 downto 0);
-        .ctrlind_06_Quantity_U32(quantity),                           // out std_logic_vector(31 downto 0);
-        .ctrlind_07_Order_Id_U64(order_id),                           // out std_logic_vector(63 downto 0);
-        .ctrlind_08_Side_U8(side),                                    // out std_logic_vector(7 downto 0);
-        .ctrlind_09_OrderBook_Command(orderbook_command),             // out std_logic_vector(15 downto 0);
-        .ctrlind_10_data_valid(data_valid_in),                        // in std_logic_vector(0 downto 0);
-        .ctrlind_11_data(bats_data),                                  // in std_logic_vector(7 downto 0);
-        .ctrlind_12_reset(0),                                         // in std_logic_vector(0 downto 0);
-        .ctrlind_13_Ready_for_Udp_Input(),                            // out std_logic_vector(0 downto 0);
+        .ctrlind_04_Ready_for_OrderBook_Command(1),
+        .ctrlind_05_OrderBook_Command_Valid(orderbook_command_valid), // out std_logic_vector(0 downto 0);
+        .ctrlind_06_Cancelled_Quantity_U32(cancelled_quantity),       // out std_logic_vector(31 downto 0);
+        .ctrlind_07_Executed_Quantity_U32(executed_quantity),         // out std_logic_vector(31 downto 0);
+        .ctrlind_08_Price_U64(price),                                 // out std_logic_vector(63 downto 0);
+        .ctrlind_09_Symbol_U64(symbol),                               // out std_logic_vector(63 downto 0);
+        .ctrlind_10_Quantity_U32(quantity),                           // out std_logic_vector(31 downto 0);
+        .ctrlind_11_Order_Id_U64(order_id),                           // out std_logic_vector(63 downto 0);
+        .ctrlind_12_Side_U8(side),                                    // out std_logic_vector(7 downto 0);
+        .ctrlind_13_OrderBook_Command(orderbook_command),             // out std_logic_vector(15 downto 0);
+        .ctrlind_02_data_valid(data_valid_in),                        // in std_logic_vector(0 downto 0);
+        .ctrlind_01_data(bats_data),                                  // in std_logic_vector(7 downto 0);
+        .ctrlind_00_reset(0),                                         // in std_logic_vector(0 downto 0);
+        .ctrlind_03_Ready_for_Udp_Input(),                            // out std_logic_vector(0 downto 0);
         .Clk40Derived2x1I0MHz(clk)
     );
 
