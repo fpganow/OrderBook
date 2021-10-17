@@ -40,90 +40,151 @@ module orderbook_tb;
         #duty_cycle;
     end
 
-//    // UDP Payload related signals/registers
-//    reg data_valid_in;
-//    reg [7:0]data2_in;
-//    reg[7:0] bats_data;
-//    wire [15:0] orderbook_command;
-//    wire orderbook_command_valid;
-//    wire [31:0] cancelled_quantity;
-//    wire [31:0] executed_quantity;
-//    wire [63:0] price;
-//    wire [63:0] symbol;
-//    wire [31:0] quantity;
-//    wire [63:0] order_id;
-//    wire [7:0] side;
+    // Output indicators
+    wire [1046:0] out_OrderBook_Variables;
+    wire [311:0]  out_OrderBook_Result;
+    wire [0:0]    out_Ready_For_OrderBook_Command;
+    wire [0:0]    out_Output_Valid;
 
-    
-//    NiFpgaIPWrapper_orderbook UUT (
-//		.reset(0),
-//        .enable_in(1),
-//        .enable_out(),
-//        .enable_clr(0),
-//        .ctrlind_00_Reset(0),
-//        .ctrlind_01_Ready_For_OrderBook_Result(1),
-//		.ctrlind_02_OrderBook_Command(), // : in std_logic_vector(311 downto 0);
-//		.ctrlind_03_OrderBook_Command_Valid(0), // : in std_logic_vector(0 downto 0);
-//		.ctrlind_04_OrderBook_Variables(), // : out std_logic_vector(1046 downto 0);
-//		.ctrlind_05_OrderBook_Entry(), // : out std_logic_vector(311 downto 0);
-//		.ctrlind_06_Ready_For_OrderBook_Command(), // : out std_logic_vector(0 downto 0);
-//		.ctrlind_07_OrderBook_Result_Valid(), // : out std_logic_vector(0 downto 0);
-//        .Clk40Derived2x1I0MHz(clk)
-//    );
+    // Input controls
+    reg [0:0]    in_ready_for_output;  // Ready for Output
+    reg [311:0]  in_orderbook_command; // OrderBook.Command
+    reg [0:0]    in_input_valid;       // Input Valid
 
-//    integer fptr;
-//    integer scan_faults;
+    // OrderBook.Command consists of:
+    //   CommandType = {AddOrder, OrderExecuted, ReduceSize, ModifyOrder, DeleteOrder, Get.All.Orders, Get.Top}
+    //   Side (U8) 
+    //   Order Id (U64)
+    //   Quantity (U32)
+    //   Symbool (U64)
+    //   Price (U64)
+    //   Executed Quantity (U32)
+    //   Cancelled Quantity (U32)
 
-    reg [5:0]large_variable;
-    reg [1:0] left_side;
-    reg [3:0] right_side;
-    
-    reg [7:0]command_type;
-    reg [7:0] side;
-    reg [63:0] order_id;
-    reg [31:0]quantity;
-    reg [63:0]symbol;
-    reg [63:0]price;
-    reg [31:0]executed_quantity;
-    reg [31:0]cancelled_quantity;
-    
+    NiFpgaIPWrapper_orderbook_ip UUT (
+		.reset(0),
+        .enable_in(1),
+        .enable_out(),
+        .enable_clr(0),
+
+        .ctrlind_00_Ready_for_Output(in_ready_for_output),              // in std_logic_vector(0 downto 0);
+        .ctrlind_03_Reset(0),                                           // in std_logic_vector(0 downto 0);
+        .ctrlind_05_Input_Valid(in_input_valid),                        // in std_logic_vector(0 downto 0);
+		.ctrlind_06_OrderBook_Command(in_orderbook_command),            // in std_logic_vector(311 downto 0);
+        .ctrlind_01_Output_Valid(out_Output_Valid),                     // out std_logic_vector(0 downto 0);
+        .ctrlind_02_OrderBook_Result(out_OrderBook_Result),             // out std_logic_vector(311 downto 0);
+        .ctrlind_04_OrderBook_Variables(out_OrderBook_Variables),       // out std_logic_vector(1046 downto 0);
+    	.ctrlind_07_Ready_for_Input(out_Ready_For_OrderBook_Command),   // out std_logic_vector(0 downto 0);
+
+        .Clk40Derived2x1I0MHz(clk)
+    );
+
+    reg [ 7:0]   command_type;
+    reg [ 7:0]   side;
+    reg [63:0]   order_id;
+    reg [31:0]   quantity;
+    reg [63:0]   symbol;
+    reg [63:0]   price;
+    reg [31:0]   executed_quantity;
+    reg [31:0]   cancelled_quantity;
+
+    reg [ 7:0]  result_order_book_result;
+    reg [ 7:0]  result_side;
+    reg [63:0]  result_order_id;
+    reg [31:0]  result_quantity;
+    reg [63:0]  result_symbol;
+    reg [63:0]  result_price;
+    reg [31:0]  result_other_1;
+    reg [31:0]  result_other_2;
+
     initial
     begin
-        left_side <= 2'b10;
-        right_side <= 4'b1000;
-//        large_variable = {2'b11, 4'b1111};
+        // Initial defaults
+        in_ready_for_output = 1'b0;
+        in_orderbook_command = 311'b0;
+        in_input_valid = 1'b0;
+
+        // Now wait for UUT to say it is ready for a command
+        // (and ignore the initial value which is usually 1)
+        #(duty_cycle * 10);
+
+        // Wait for IP to be ready
+        wait(out_Ready_For_OrderBook_Command);
+
+        // Now wait one more clock cycle
+        #(duty_cycle * 2);
+        
+        // And set up the first orderbook command
+        command_type        =          8'h0; // Add.Order = 0
+        side                =         8'h42; 
+        order_id            =  64'h22001100;
+        quantity            =        32'h7d;
+        symbol              =      64'h7169;
+        price               =      64'h2653;
+        executed_quantity   =         32'h0;
+        cancelled_quantity  =         32'h0;
+
+        in_orderbook_command = {
+                                command_type,
+                                side,
+                                order_id,
+                                quantity,
+                                symbol,
+                                price,
+                                executed_quantity,
+                                cancelled_quantity
+                               };
+        in_input_valid = 1'b1;
+        in_ready_for_output = 1'b1;
 
         #(duty_cycle * 2);
-        // Join 2 variables
-        large_variable = {left_side, right_side};
+        #(duty_cycle * 2);
+        in_input_valid = 1'b0;
 
-// TODO: Is the order of each command correct? I think I remember a case where it was not...
-// OrderBook.Command
-// CommandType = {AddOrder, OrderExecuted, ReduceSize, ModifyOrder, DeleteOrder, Get.All.Orders, Get.Top}
-// Side (U8) 
-// Order Id (U64)
-// Quantity (U32)
-// Symbool (U64)
-// Price (U64)
-// Executed Quantity (U32)
-// Cancelled Quantity (U32)
+        // Now wait a few clock cycles
+        #(duty_cycle * 20);
 
-//        fptr = $fopen("raw.pitch.dat", "rb");
-//        if(fptr == 0)
-//        begin
-//            $display("raw.pitch.dat was NULL");
-//            $finish;
-//        end
-//        while (!$feof(fptr))
-//        begin
-//            scan_faults = $fread(bats_data, fptr);
-//            data2_in = bats_data;
-//            data_valid_in = 1'b1;
-//            #period;           
-//        end
-//        $fclose(fptr); // Close file before finish
+        command_type        =          8'h5; // Get.All.Orders = 5
+        side                =         8'h42; 
+        order_id            =  64'h00000000;
+        quantity            =         32'h0;
+        symbol              =      64'h7169;
+        price               =         64'h0;
+        executed_quantity   =         32'h0;
+        cancelled_quantity  =         32'h0;
 
-//        $finish;
+        in_orderbook_command = {
+                                command_type,
+                                side,
+                                order_id,
+                                quantity,
+                                symbol,
+                                price,
+                                executed_quantity,
+                                cancelled_quantity
+                               };
+        in_input_valid = 1'b1;
+        in_ready_for_output = 1'b1;
+
+        #(duty_cycle * 2);
+        #(duty_cycle * 2);
+        in_input_valid = 1'b0;
+
+        wait(out_Output_Valid);
+
+        {
+            result_order_book_result,
+            result_side,
+            result_order_id,
+            result_quantity,
+            result_symbol,
+            result_price,
+            result_other_1,
+            result_other_2
+        } = out_OrderBook_Result;
+
+        #(duty_cycle * 2);
+        $finish;
     end
 
 endmodule
