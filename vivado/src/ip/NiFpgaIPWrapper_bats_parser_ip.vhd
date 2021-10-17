@@ -7,20 +7,20 @@
 -- enable_in  :  Enable in port. Minimum re-initialization length: 7 base clock cycles.
 -- enable_out :  Enable out port.
 -- enable_clr :  Enable clear port.
--- ctrlind_00_Ready_for_OrderBook_Command : Top level control "Ready.for.OrderBook.Command", sync to Clk40Derived2x1I0MHz, bool
--- ctrlind_01_OrderBook_Command_Valid : Top level indicator "OrderBook.Command.Valid", sync to Clk40Derived2x1I0MHz, bool
--- ctrlind_02_Cancelled_Quantity_U32 : Top level indicator "Cancelled Quantity (U32)", sync to Clk40Derived2x1I0MHz, u32
--- ctrlind_03_Executed_Quantity_U32 : Top level indicator "Executed Quantity (U32)", sync to Clk40Derived2x1I0MHz, u32
--- ctrlind_04_Price_U64 : Top level indicator "Price (U64)", sync to Clk40Derived2x1I0MHz, u64
--- ctrlind_05_Symbol_U64 : Top level indicator "Symbol (U64)", sync to Clk40Derived2x1I0MHz, u64
--- ctrlind_06_Quantity_U32 : Top level indicator "Quantity (U32)", sync to Clk40Derived2x1I0MHz, u32
--- ctrlind_07_Order_Id_U64 : Top level indicator "Order Id (U64)", sync to Clk40Derived2x1I0MHz, u64
--- ctrlind_08_Side_U8 : Top level indicator "Side (U8)", sync to Clk40Derived2x1I0MHz, u8
--- ctrlind_09_OrderBook_Command : Top level indicator "OrderBook Command", sync to Clk40Derived2x1I0MHz, enum16
--- ctrlind_10_data_valid : Top level control "data_valid", sync to Clk40Derived2x1I0MHz, bool
--- ctrlind_11_data : Top level control "data", sync to Clk40Derived2x1I0MHz, u8
--- ctrlind_12_reset : Top level control "reset", sync to Clk40Derived2x1I0MHz, bool
--- ctrlind_13_Ready_for_Udp_Input : Top level indicator "Ready.for.Udp.Input", sync to Clk40Derived2x1I0MHz, bool
+-- ctrlind_00_reset : Top level control "reset", sync to Clk40Derived2x1I0MHz, bool
+-- ctrlind_01_data : Top level control "data", sync to Clk40Derived2x1I0MHz, u8
+-- ctrlind_02_data_valid : Top level control "data_valid", sync to Clk40Derived2x1I0MHz, bool
+-- ctrlind_03_Ready_for_Udp_Input : Top level indicator "Ready.for.Udp.Input", sync to Clk40Derived2x1I0MHz, bool
+-- ctrlind_04_Ready_for_OrderBook_Command : Top level control "Ready.for.OrderBook.Command", sync to Clk40Derived2x1I0MHz, bool
+-- ctrlind_05_OrderBook_Command_Valid : Top level indicator "OrderBook.Command.Valid", sync to Clk40Derived2x1I0MHz, bool
+-- ctrlind_06_Cancelled_Quantity_U32 : Top level indicator "Cancelled Quantity (U32)", sync to Clk40Derived2x1I0MHz, u32
+-- ctrlind_07_Executed_Quantity_U32 : Top level indicator "Executed Quantity (U32)", sync to Clk40Derived2x1I0MHz, u32
+-- ctrlind_08_Price_U64 : Top level indicator "Price (U64)", sync to Clk40Derived2x1I0MHz, u64
+-- ctrlind_09_Symbol_U64 : Top level indicator "Symbol (U64)", sync to Clk40Derived2x1I0MHz, u64
+-- ctrlind_10_Quantity_U32 : Top level indicator "Quantity (U32)", sync to Clk40Derived2x1I0MHz, u32
+-- ctrlind_11_Order_Id_U64 : Top level indicator "Order Id (U64)", sync to Clk40Derived2x1I0MHz, u64
+-- ctrlind_12_Side_U8 : Top level indicator "Side (U8)", sync to Clk40Derived2x1I0MHz, u8
+-- ctrlind_13_OrderBook_Command : Top level indicator "OrderBook Command", sync to Clk40Derived2x1I0MHz, enum16
 -- Clk40Derived2x1I0MHz : Clock "80MHz", nominal frequency 80.00 MHz, base clock
 
 library ieee;
@@ -32,20 +32,20 @@ entity NiFpgaIPWrapper_bats_parser_ip is
 			enable_in : in std_logic;
 			enable_out : out std_logic;
 			enable_clr : in std_logic;
-			ctrlind_00_Ready_for_OrderBook_Command : in std_logic_vector(0 downto 0);
-			ctrlind_01_OrderBook_Command_Valid : out std_logic_vector(0 downto 0);
-			ctrlind_02_Cancelled_Quantity_U32 : out std_logic_vector(31 downto 0);
-			ctrlind_03_Executed_Quantity_U32 : out std_logic_vector(31 downto 0);
-			ctrlind_04_Price_U64 : out std_logic_vector(63 downto 0);
-			ctrlind_05_Symbol_U64 : out std_logic_vector(63 downto 0);
-			ctrlind_06_Quantity_U32 : out std_logic_vector(31 downto 0);
-			ctrlind_07_Order_Id_U64 : out std_logic_vector(63 downto 0);
-			ctrlind_08_Side_U8 : out std_logic_vector(7 downto 0);
-			ctrlind_09_OrderBook_Command : out std_logic_vector(15 downto 0);
-			ctrlind_10_data_valid : in std_logic_vector(0 downto 0);
-			ctrlind_11_data : in std_logic_vector(7 downto 0);
-			ctrlind_12_reset : in std_logic_vector(0 downto 0);
-			ctrlind_13_Ready_for_Udp_Input : out std_logic_vector(0 downto 0);
+			ctrlind_00_reset : in std_logic_vector(0 downto 0);
+			ctrlind_01_data : in std_logic_vector(7 downto 0);
+			ctrlind_02_data_valid : in std_logic_vector(0 downto 0);
+			ctrlind_03_Ready_for_Udp_Input : out std_logic_vector(0 downto 0);
+			ctrlind_04_Ready_for_OrderBook_Command : in std_logic_vector(0 downto 0);
+			ctrlind_05_OrderBook_Command_Valid : out std_logic_vector(0 downto 0);
+			ctrlind_06_Cancelled_Quantity_U32 : out std_logic_vector(31 downto 0);
+			ctrlind_07_Executed_Quantity_U32 : out std_logic_vector(31 downto 0);
+			ctrlind_08_Price_U64 : out std_logic_vector(63 downto 0);
+			ctrlind_09_Symbol_U64 : out std_logic_vector(63 downto 0);
+			ctrlind_10_Quantity_U32 : out std_logic_vector(31 downto 0);
+			ctrlind_11_Order_Id_U64 : out std_logic_vector(63 downto 0);
+			ctrlind_12_Side_U8 : out std_logic_vector(7 downto 0);
+			ctrlind_13_OrderBook_Command : out std_logic_vector(15 downto 0);
 			Clk40Derived2x1I0MHz : in std_logic
 		);
 end NiFpgaIPWrapper_bats_parser_ip;
@@ -58,20 +58,20 @@ architecture vhdl_labview of NiFpgaIPWrapper_bats_parser_ip is
 			enable_in : in std_logic;
 			enable_out : out std_logic;
 			enable_clr : in std_logic;
-			ctrlind_00_Ready_for_OrderBook_Command : in std_logic_vector(0 downto 0);
-			ctrlind_01_OrderBook_Command_Valid : out std_logic_vector(0 downto 0);
-			ctrlind_02_Cancelled_Quantity_U32 : out std_logic_vector(31 downto 0);
-			ctrlind_03_Executed_Quantity_U32 : out std_logic_vector(31 downto 0);
-			ctrlind_04_Price_U64 : out std_logic_vector(63 downto 0);
-			ctrlind_05_Symbol_U64 : out std_logic_vector(63 downto 0);
-			ctrlind_06_Quantity_U32 : out std_logic_vector(31 downto 0);
-			ctrlind_07_Order_Id_U64 : out std_logic_vector(63 downto 0);
-			ctrlind_08_Side_U8 : out std_logic_vector(7 downto 0);
-			ctrlind_09_OrderBook_Command : out std_logic_vector(15 downto 0);
-			ctrlind_10_data_valid : in std_logic_vector(0 downto 0);
-			ctrlind_11_data : in std_logic_vector(7 downto 0);
-			ctrlind_12_reset : in std_logic_vector(0 downto 0);
-			ctrlind_13_Ready_for_Udp_Input : out std_logic_vector(0 downto 0);
+			ctrlind_00_reset : in std_logic_vector(0 downto 0);
+			ctrlind_01_data : in std_logic_vector(7 downto 0);
+			ctrlind_02_data_valid : in std_logic_vector(0 downto 0);
+			ctrlind_03_Ready_for_Udp_Input : out std_logic_vector(0 downto 0);
+			ctrlind_04_Ready_for_OrderBook_Command : in std_logic_vector(0 downto 0);
+			ctrlind_05_OrderBook_Command_Valid : out std_logic_vector(0 downto 0);
+			ctrlind_06_Cancelled_Quantity_U32 : out std_logic_vector(31 downto 0);
+			ctrlind_07_Executed_Quantity_U32 : out std_logic_vector(31 downto 0);
+			ctrlind_08_Price_U64 : out std_logic_vector(63 downto 0);
+			ctrlind_09_Symbol_U64 : out std_logic_vector(63 downto 0);
+			ctrlind_10_Quantity_U32 : out std_logic_vector(31 downto 0);
+			ctrlind_11_Order_Id_U64 : out std_logic_vector(63 downto 0);
+			ctrlind_12_Side_U8 : out std_logic_vector(7 downto 0);
+			ctrlind_13_OrderBook_Command : out std_logic_vector(15 downto 0);
 			Clk40Derived2x1I0MHz : in std_logic;
 			tDiagramEnableOut : in std_logic
 		);
@@ -84,20 +84,20 @@ begin
 			enable_in => enable_in,
 			enable_out => enable_out,
 			enable_clr => enable_clr,
-			ctrlind_00_Ready_for_OrderBook_Command => ctrlind_00_Ready_for_OrderBook_Command,
-			ctrlind_01_OrderBook_Command_Valid => ctrlind_01_OrderBook_Command_Valid,
-			ctrlind_02_Cancelled_Quantity_U32 => ctrlind_02_Cancelled_Quantity_U32,
-			ctrlind_03_Executed_Quantity_U32 => ctrlind_03_Executed_Quantity_U32,
-			ctrlind_04_Price_U64 => ctrlind_04_Price_U64,
-			ctrlind_05_Symbol_U64 => ctrlind_05_Symbol_U64,
-			ctrlind_06_Quantity_U32 => ctrlind_06_Quantity_U32,
-			ctrlind_07_Order_Id_U64 => ctrlind_07_Order_Id_U64,
-			ctrlind_08_Side_U8 => ctrlind_08_Side_U8,
-			ctrlind_09_OrderBook_Command => ctrlind_09_OrderBook_Command,
-			ctrlind_10_data_valid => ctrlind_10_data_valid,
-			ctrlind_11_data => ctrlind_11_data,
-			ctrlind_12_reset => ctrlind_12_reset,
-			ctrlind_13_Ready_for_Udp_Input => ctrlind_13_Ready_for_Udp_Input,
+			ctrlind_00_reset => ctrlind_00_reset,
+			ctrlind_01_data => ctrlind_01_data,
+			ctrlind_02_data_valid => ctrlind_02_data_valid,
+			ctrlind_03_Ready_for_Udp_Input => ctrlind_03_Ready_for_Udp_Input,
+			ctrlind_04_Ready_for_OrderBook_Command => ctrlind_04_Ready_for_OrderBook_Command,
+			ctrlind_05_OrderBook_Command_Valid => ctrlind_05_OrderBook_Command_Valid,
+			ctrlind_06_Cancelled_Quantity_U32 => ctrlind_06_Cancelled_Quantity_U32,
+			ctrlind_07_Executed_Quantity_U32 => ctrlind_07_Executed_Quantity_U32,
+			ctrlind_08_Price_U64 => ctrlind_08_Price_U64,
+			ctrlind_09_Symbol_U64 => ctrlind_09_Symbol_U64,
+			ctrlind_10_Quantity_U32 => ctrlind_10_Quantity_U32,
+			ctrlind_11_Order_Id_U64 => ctrlind_11_Order_Id_U64,
+			ctrlind_12_Side_U8 => ctrlind_12_Side_U8,
+			ctrlind_13_OrderBook_Command => ctrlind_13_OrderBook_Command,
 			Clk40Derived2x1I0MHz => Clk40Derived2x1I0MHz,
 			tDiagramEnableOut => '1'
 		);

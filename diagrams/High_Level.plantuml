@@ -1,0 +1,23 @@
+@startuml High_Level
+
+title High Level view of BATS PITCH Parser 
+
+[*] -> ethernet
+
+state "Ethernet" as ethernet: PHY
+state "Ethernet" as ethernet: SFP+
+state "Ethernet" as ethernet: QSFP+
+
+ethernet -> Udp_Ip: 10/100/1000 Mbit
+ethernet -> Udp_Ip: 10 Gigabit
+
+state "UDP/IP Parser" as Udp_Ip: Extract UDP payload
+state "UDP/IP Parser" as Udp_Ip: for appropriate session
+
+Udp_Ip -> Bats_Parser
+
+state "BATS Multicast PITCH Parser" as Bats_Parser: Normalize Messages
+
+Bats_Parser -> [*]: Normalized Messages
+
+@enduml

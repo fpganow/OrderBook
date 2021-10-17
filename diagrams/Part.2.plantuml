@@ -1,6 +1,6 @@
 @startuml Part Two
 
-title Part 2: BATS Parser/Normalizer
+title Part 2: BATS PITCH Parser/Normalizer
 
 skinparam handwritten true
 left to right direction
@@ -9,16 +9,11 @@ skinparam cloud {
     handwritten false
 }
 
-' BATS/NASDAQ
-' PITCH/ITCH
-' data is in the form of:
-'   one byte per cycle
-'   eight bytes per cycle
+cloud "BATS PITCH Market Data Messages" as Data
+node "BATS Parser/Normalizer" as Normalizer
+cloud "Normalized Messages" as Normalized
 
-cloud Ethernet
-node Udp
-
-Ethernet --> Udp
-Udp --> ITCH
+Data --> Normalizer
+Normalizer--> Normalized
 
 @enduml

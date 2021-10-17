@@ -1,0 +1,29 @@
+@startuml Add.Order.Example
+
+' State Diagram
+' https://plantuml.com/state-diagram
+' https://plantuml.com/activity-diagram-legacy
+title Add.Order.Example
+
+state "Is Ready For Command True?" as ready.for.command
+state "Set Command Signals" as setup.command
+state "Set Command Signals" as setup.command: Set signals:
+state "Set Command Signals" as setup.command: Command.Valid <= True
+state "Set Command Signals" as setup.command: Reset <= False
+state "Set Command Signals" as setup.command: Command.Type <= Side
+state "Set Command Signals" as setup.command: Command.field_1 <= ...
+state "Set Command Signals" as setup.command: Command.field_2 <= ...
+state "Wait for 1 Clock Cycle" as wait.for.1
+state "Set Command.Value to False" as set.valid: - Command.Valid <= False
+
+
+[*] --> ready.for.command
+ready.for.command --> ready.for.command : No
+ready.for.command --> setup.command : Yes
+
+setup.command -> wait.for.1
+wait.for.1 --> set.valid
+
+set.valid --> [*]
+
+@enduml

@@ -1,0 +1,27 @@
+@startuml OrderBook.Interface
+
+title OrderBook.Interface
+
+state "OrderBook - Inputs" as OrderBook: [in] Command
+state "OrderBook - Inputs" as OrderBook: - Command.Type
+state "OrderBook - Inputs" as OrderBook: - Side
+state "OrderBook - Inputs" as OrderBook: - Order Id
+state "OrderBook - Inputs" as OrderBook: - Quantity
+state "OrderBook - Inputs" as OrderBook: - Symbol
+state "OrderBook - Inputs" as OrderBook: - Price
+state "OrderBook - Inputs" as OrderBook: - Executed Quantity
+state "OrderBook - Inputs" as OrderBook: - Cancelled Quantity
+state "OrderBook - Inputs" as OrderBook: [in] OrderBook.Command.Valid
+state "OrderBook - Inputs" as OrderBook: [out] Ready.For.OrderBook.Command
+state "OrderBook - Inputs" as OrderBook: [in] Reset
+
+state "OrderBook - Outputs" as OrderBook2: [out] Result
+state "OrderBook - Outputs" as OrderBook2: - Result
+state "OrderBook - Outputs" as OrderBook2: - Order Id
+state "OrderBook - Outputs" as OrderBook2: - Side
+state "OrderBook - Outputs" as OrderBook2: - Quantity
+state "OrderBook - Outputs" as OrderBook2: - Symbol
+state "OrderBook - Outputs" as OrderBook2: - Price
+state "OrderBook - Outputs" as OrderBook2: [out] OrderBook.Result.Valid
+
+@enduml

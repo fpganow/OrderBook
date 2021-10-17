@@ -1,0 +1,19 @@
+@startuml Part 5: Application
+
+title Part 5: Application
+
+skinparam handwritten true
+left to right direction
+
+skinparam cloud {
+    handwritten false
+}
+
+actor "App Request" as App
+node "Order Book Processor" as OrderBook
+database "Block RAM" as Memory
+
+App --> OrderBook
+OrderBook -> Memory
+
+@enduml

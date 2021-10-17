@@ -14,9 +14,10 @@ skinparam cloud {
 }
 
 cloud Ethernet
-node Udp
+node "UDP/IP Stack" as Udp
+cloud "Market Data Messages" as Data
 
 Ethernet --> Udp
-Udp --> ITCH
+Udp --> Data
 
 @enduml
