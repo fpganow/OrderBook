@@ -2,6 +2,7 @@
 from enum import Enum
 import struct
 
+
 class MessageType(Enum):
     TimeStamp                      =  'T'
     SystemEvent                    =  'S'
@@ -63,10 +64,10 @@ class Field(object):
 
 class ItchMessageFactory:
     @staticmethod
-    def createFromArgs( messageArgs ):
-        messageType = messageArgs[0]
-        message = ItchMessageFactory.fromMessageType( messageType )
-        message.fromArgs(messageArgs)
+    def create_from_args(message_args):
+        message_type = message_args[0]
+        message = ItchMessageFactory.fromMessageType( message_type )
+        message.fromArgs(message_args)
         return message
 
     @staticmethod
@@ -88,10 +89,11 @@ class ItchMessageFactory:
         message.fromBytes(rawMessage)
         return message
 
+
 class ItchMessage:
     def __init__(self):
-        self.specs = [ ]
-        self.specs.append( [ 0, 1, str, Field.MessageType ] )
+        self.specs = []
+        self.specs.append([0, 1, str, Field.MessageType])
 
     def isPriceField(self, field):
         if field == Field.Price    or field == Field.CrossPrice or \

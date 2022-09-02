@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
-from Itch41 import *
+from itch.Itch41 import *
 
 
 def generateMessages(messages):
     genMessages = [ ]
     for message in messages:
-        msg = ItchMessageFactory.createFromArgs(message)
+        msg = ItchMessageFactory.create_from_args(message)
         if msg:
             genMessages.append(msg)
     return genMessages
