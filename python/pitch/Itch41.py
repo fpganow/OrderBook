@@ -181,6 +181,8 @@ class ItchMessage:
         messageLength = struct.unpack("!h", self.rawMessage[0:2])[0]
         print("--- Length of message: {}".format(messageLength))
         for spec in self.specs:
+            #
+            #self.specs.append( [   5, 8, int, Field.OrderRefNum ] )
             rawBytes = self.rawMessage[ 2 + spec[0] : 2 + spec[0] + spec[1] ]
 
             if spec[2] is int:
@@ -205,7 +207,7 @@ class ItchMessage:
 
     def saveToFile(self, openMode='ab', fileName=None):
         if fileName is None:
-            fileName = self.type + ".itch"
+            fileName = self.type + ".pitch"
             print("Setting file name to: {0}".format(fileName))
         print("Saving to file: {0}".format(fileName))
         dataLen = len(self.rawMessage[2:])

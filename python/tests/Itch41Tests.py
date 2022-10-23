@@ -3,7 +3,9 @@ from hamcrest import (
     assert_that,
     equal_to
 )
-from itch.Itch41 import *
+from pitch.Itch41 import *
+
+
 
 
 class Itch41Tests(TestCase):
@@ -136,6 +138,9 @@ class Itch41Tests(TestCase):
         message = ItchMessageFactory.create_from_args(messageArgs)
 
         # THEN
+        #message.rawMessage
+        message.dumpPretty()
+        message.dumpRawBytes()
         self.assertEqual(     'A', message.MessageType )
         self.assertEqual(     101, message.NanoSeconds )
         self.assertEqual(    1001, message.OrderRefNum )

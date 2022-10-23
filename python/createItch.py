@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from itch.Itch41 import *
+from pitch.Itch41 import *
 
 
 def generateMessages(messages):

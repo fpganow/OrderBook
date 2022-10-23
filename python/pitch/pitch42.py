@@ -1,7 +1,110 @@
-from typing import List
+import collections
+from datetime import datetime
+from typing import Any, ByteString, List, OrderedDict
+from enum import Enum
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 
-class SequencedUnitHeader:
+class FieldName(Enum):
+    HdrLength = 'Hdr Length'
+    HdrCount = 'Hdr Count'
+    HdrUnit = 'Hdr Unit'
+    HdrSequence = 'Hdr Sequence'
+
+    AddFlags = 'Flags'
+    Length = 'Length'
+    ExecutedQuantity = 'Executed Quantity'
+    ExecutionId = 'Execution Id'
+    MessageType = 'Message Type'
+    OrderId = 'Order Id'
+    Price = 'Price'
+    Quantity = 'Quantity'
+    SideIndicator = 'Side Indicator'
+    Symbol = 'Symbol'
+    Time = 'Time'
+    TimeOffset = 'Time Offset'
+
+
+class FieldType(Enum):
+    Alphanumeric = 0
+    Binary = 1
+    BinaryLongPrice = 2
+    BinaryShortPrice = 3
+    BitField = 4
+    PrintableAscii = 5
+    Value = 6
+
+
+class FieldSpec:
+    def __init__(self,
+                 field_name: FieldName,
+                 offset: int,
+                 length: int,
+                 field_type: FieldType,
+                 value: Any = None):
+        self._name = field_name
+        self._offset = offset
+        self._length = length
+        self._field_type = field_type
+        self._value = value
+
+    def offset(self, offset: int = None) -> int:
+        if offset is not None:
+            self._offset = offset
+        return self._offset
+
+    def length(self, length: int = None) -> int:
+        if length is not None:
+            self._length = length
+        return self._length
+
+    def value(self, value: Any = None) -> Any:
+        if value is not None:
+            self._value = value
+        return self._value
+
+    def get_bytes(self) -> ByteString:
+        if self._field_type == FieldType.Alphanumeric:
+            return self._value.encode()
+        elif self._field_type == FieldType.Binary:
+            if type(self._value) is str:
+                return self._value.encode()
+            return self._value.to_bytes(self._length, byteorder='little')
+        elif self._field_type == FieldType.BinaryLongPrice:
+            tmp_val = int(self._value * 10_000)
+            return tmp_val.to_bytes(self._length, byteorder='little')
+        elif self._field_type == FieldType.BitField:
+            return self._value.to_bytes(self._length, byteorder='little')
+        elif self._field_type == FieldType.PrintableAscii:
+            tmp_val = self._value + (6 - len(self._value) ) * ' '
+            return tmp_val.encode()
+        elif self._field_type == FieldType.Value:
+            return self._value.to_bytes(self._length, byteorder='little')
+        return bytearray([])
+
+
+class MessageBase:
+    def __init__(self):
+        pass
+
+    def get_bytes(self):
+        final_msg = bytearray()
+
+        for field_name, field_spec in self._field_specs.items():
+            logger.debug(f'{field_name}')
+
+            tmp_val = field_spec.get_bytes()
+            tmp_val_str = [f'0x{format(x, "02x")}' for x in tmp_val]
+            logger.debug(f'\tAppending: {list(tmp_val_str)}')
+
+            final_msg.extend(tmp_val)
+        return final_msg
+
+
+class SequencedUnitHeader(MessageBase):
     """
     Field          Offset   Length   Value/Type   Description
     Hdr Length       0        2        Binary     Length of entire block of messages.
@@ -13,14 +116,49 @@ class SequencedUnitHeader:
     Hdr Sequence     4        4        Binary     Sequence of first message to follow this
                                                   header.
     """
-    def __init__(self, hdr_sequence: int = 1, messages: List[None] = None):
-        # Un-sequenced headers will have a 0 value for the sequence field
-        # and potentially for the unit field.
-        self._hdr_length = 0
-        self._hdr_count = 0
-        self._hdr_unit = 1
-        self._hdr_sequence = hdr_sequence
-        self._messages = messages
+    def __init__(self,
+                 hdr_count: int = 0,
+                 hdr_unit: int = 1,
+                 hdr_sequence: int = 1):
+
+        self._field_specs: OrderedDict[FieldName, FieldSpec] = collections.OrderedDict()
+        self._field_specs[FieldName.HdrLength] = FieldSpec(field_name=FieldName.HdrLength,
+                                                           offset=0, length=2,
+                                                           field_type=FieldType.Binary)
+        self._field_specs[FieldName.HdrCount] = FieldSpec(field_name=FieldName.HdrCount,
+                                                           offset=2, length=1,
+                                                           field_type=FieldType.Binary)
+        self._field_specs[FieldName.HdrUnit] = FieldSpec(field_name=FieldName.HdrUnit,
+                                                          offset=3, length=1,
+                                                          field_type=FieldType.Binary)
+        self._field_specs[FieldName.HdrSequence] = FieldSpec(field_name=FieldName.HdrSequence,
+                                                             offset=3, length=4,
+                                                             field_type=FieldType.Binary)
+
+        self._field_specs[FieldName.HdrLength].value(8)
+        self._field_specs[FieldName.HdrCount].value(hdr_count)
+        self._field_specs[FieldName.HdrUnit].value(hdr_unit)
+        self._field_specs[FieldName.HdrSequence].value(hdr_sequence)
+
+    def get_bytes_old(self):
+        self.calculate()
+
+        final_msg = []
+
+        # Hdr Length
+        hdr_length = self._hdr_length.to_bytes(length=2, byteorder='little')
+        final_msg.extend(hdr_length)
+
+        # Hdr Count
+        final_msg.append(self._hdr_count)
+
+        # Hdr Unit
+        final_msg.append(self._hdr_unit)
+
+        # Hdr Sequence
+        hdr_seq = self._hdr_sequence.to_bytes(length=4, byteorder='little')
+        final_msg.extend(hdr_seq)
+        return bytearray(final_msg)
 
 
 class Heartbeat:
@@ -37,71 +175,172 @@ class Heartbeat:
         pass
 
 
-class Time:
+class Time(MessageBase):
     """
         A Time message is immediately generated and sent when there is a PITCH
         event for a given clock second.
-
-        Field          Offset   Length   Value/Type   Description
-        Length           0        1        Binary     Length of this message including
-                                                      this field
-        Message Type     1        1         0x20      Time Message
-        Time             2        4        Binary     Number of whole seconds from midnight
-                                                      Eastern Time
     """
-    def __init__(self):
-        pass
+    def __init__(self, time: int = None):
+        self._field_specs: OrderedDict[FieldName, FieldSpec] = collections.OrderedDict()
+        self._field_specs[FieldName.Length] = FieldSpec(field_name=FieldName.Length,
+                                                        offset=0, length=1,
+                                                        field_type=FieldType.Binary,
+                                                        value=6)  # TODO: Calculate length
+        self._field_specs[FieldName.MessageType] = FieldSpec(field_name=FieldName.MessageType,
+                                                             offset=1, length=1,
+                                                             field_type=FieldType.Value,
+                                                             value=0x20)
+        seconds_since_midnight = time
+        if time is None:
+            now = datetime.now()
+            seconds_since_midnight = (now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
+        self._field_specs[FieldName.Time] = FieldSpec(field_name=FieldName.Time,
+                                                      offset=2, length=4,
+                                                      field_type=FieldType.Binary,
+                                                      value=seconds_since_midnight)
 
 
-class AddOrder:
+class AddOrder(MessageBase):
     """
         Represents a newly accepted visible order on the Cboe book.
-
-        Field          Offset   Length   Value/Type     Description
-        Length           0        1        Binary       Length of this message including
-                                                        this field
-        Message Type     1        1         0x21        Add Order Message (long)
-        Time Offset      2        4        Binary       Nanosecond offset from the last unit
-                                                        timestamp
-        Order Id         6        8        Binary       Day-specific identifier for this order
-        Side Indicator  14        1      Alphanumeric   B = Buy Order
-                                                        S = Sell Order
-        Quantity        15        4        Binary       Number of shares/contracts being added
-                                                        to the book
-        Symbol          19        6       Printable     Symbol right padded with spaces
-                                            ASCII
-        Price           25        8        Binary       The limit order price
-                                         Long Price
-        Add Flags       33        1        BitField     Bit 0 - Display
-                                                              0 = Order is not displayed
-                                                              1 = Order is displayed
-                                                        Bits 1-2 - Reserved
-                                                        Bit3 - AON (Options only)
-                                                        Bits 4-7 - Reserved
-
-        Variations:
-            Message Type = 0x22  Add Order Message (short)
-              field     offset  length
-              quantity    15      2
-              symbol      17      6
-              price       23      2
-            Message Type = 0x2F  Add Order Message (expanded)
-              field     offset  length
-              quantity    15      2
-              symbol      17      6
-              price       23      2
     """
+    class AddOrderType(Enum):
+        Long = 1
+        Short = 2
+
     def __init__(self,
+                 time_offset: int,
+                 order_id: str,
                  side: str,
                  quantity: int,
                  symbol: str,
-                 price: int):
-        # Add Order (long) = 0x21
-        # Add Order (short) = 0x22
-        # Add Order (expanded) = 0x2F
-        self._message_type = 0x21
-        self._order_id = 100
-        self._side = side
-        self._quantity = quantity
-        self._symbol = symbol
-        self._price = price
+                 price: int,
+                 displayed: bool = True,
+                 add_order_type: AddOrderType = AddOrderType.Long):
+
+        self._field_specs: OrderedDict[FieldName, FieldSpec] = collections.OrderedDict()
+        self._field_specs[FieldName.Length] = FieldSpec(field_name=FieldName.Length,
+                                                        offset=0, length=1,
+                                                        field_type=FieldType.Binary)
+
+        self._field_specs[FieldName.MessageType] = FieldSpec(field_name=FieldName.MessageType,
+                                                             offset=1, length=1,
+                                                             field_type=FieldType.Value)
+        self._field_specs[FieldName.TimeOffset] = FieldSpec(field_name=FieldName.TimeOffset,
+                                                            offset=2, length=4,
+                                                            field_type=FieldType.Binary,
+                                                            value=time_offset)
+        self._field_specs[FieldName.OrderId] = FieldSpec(field_name=FieldName.OrderId,
+                                                         offset=6, length=8,
+                                                         field_type=FieldType.Binary,
+                                                         value=order_id)
+        self._field_specs[FieldName.SideIndicator] = FieldSpec(field_name=FieldName.SideIndicator,
+                                                               offset=14, length=1,
+                                                               field_type=FieldType.Alphanumeric,
+                                                               value=side)
+        self._field_specs[FieldName.Quantity] = FieldSpec(field_name=FieldName.Quantity,
+                                                          offset=15, length=4,
+                                                          field_type=FieldType.Binary,
+                                                          value=quantity)
+        self._field_specs[FieldName.Symbol] = FieldSpec(field_name=FieldName.Symbol,
+                                                        offset=19, length=6,
+                                                        field_type=FieldType.PrintableAscii,
+                                                        value=symbol)
+        self._field_specs[FieldName.Price] = FieldSpec(field_name=FieldName.Price,
+                                                       offset=25, length=8,
+                                                       field_type=FieldType.BinaryLongPrice,
+                                                       value=price)
+        self._field_specs[FieldName.AddFlags] = FieldSpec(field_name=FieldName.AddFlags,
+                                                          offset=33, length=1,
+                                                          field_type=FieldType.BitField,
+                                                          value=1 if displayed == 1 else 0)
+
+        if add_order_type == AddOrder.AddOrderType.Long:
+            self._field_specs[FieldName.Length].value(34)
+            self._field_specs[FieldName.MessageType].value(0x21)
+
+        elif add_order_type == AddOrder.AddOrderType.Short:
+            self._field_specs[FieldName.Length].value(26)
+            self._field_specs[FieldName.MessageType].value(0x22)
+
+            self._field_specs[FieldName.Quantity].offset(15)
+            self._field_specs[FieldName.Quantity].length(2)
+            self._field_specs[FieldName.Symbol].offset(17)
+            self._field_specs[FieldName.Symbol].length(6)
+            self._field_specs[FieldName.Price].offset(23)
+            self._field_specs[FieldName.Price].length(2)
+            self._field_specs[FieldName.AddFlags].offset(25)
+            self._field_specs[FieldName.AddFlags].length(1)
+
+
+class AddOrderLong(AddOrder):
+    def __init__(self,
+                 time_offset: int,
+                 order_id: str,
+                 side: str,
+                 quantity: int,
+                 symbol: str,
+                 price: int,
+                 displayed: bool = True):
+        super().__init__(time_offset=time_offset,
+                         order_id=order_id,
+                         side=side,
+                         quantity=quantity,
+                         symbol=symbol,
+                         price=price,
+                         displayed=displayed,
+                         add_order_type=AddOrder.AddOrderType.Long)
+
+
+class AddOrderShort(AddOrder):
+    def __init__(self,
+                 time_offset: int,
+                 order_id: str,
+                 side: str,
+                 quantity: int,
+                 symbol: str,
+                 price: int,
+                 displayed: bool = True):
+        super().__init__(time_offset=time_offset,
+                         order_id=order_id,
+                         side=side,
+                         quantity=quantity,
+                         symbol=symbol,
+                         price=price,
+                         displayed=displayed,
+                         add_order_type=AddOrder.AddOrderType.Short)
+
+
+class OrderExecuted(MessageBase):
+    def __init__(self,
+                 time_offset: int,
+                 order_id: str,
+                 executed_quantity: int,
+                 execution_id: str):
+
+        self._field_specs: OrderedDict[FieldName, FieldSpec] = collections.OrderedDict()
+        self._field_specs[FieldName.Length] = FieldSpec(field_name=FieldName.Length,
+                                                        offset=0, length=1,
+                                                        field_type=FieldType.Binary,
+                                                        value=26)  # TODO: Calculate length
+        self._field_specs[FieldName.MessageType] = FieldSpec(field_name=FieldName.MessageType,
+                                                             offset=1, length=1,
+                                                             field_type=FieldType.Value,
+                                                             value=0x23)
+        self._field_specs[FieldName.TimeOffset] = FieldSpec(field_name=FieldName.TimeOffset,
+                                                            offset=2, length=4,
+                                                            field_type=FieldType.Binary,
+                                                            value=time_offset)
+        self._field_specs[FieldName.OrderId] = FieldSpec(field_name=FieldName.OrderId,
+                                                         offset=6, length=8,
+                                                         field_type=FieldType.Binary,
+                                                         value=order_id)
+        self._field_specs[FieldName.ExecutedQuantity] = FieldSpec(field_name=FieldName.ExecutedQuantity,
+                                                                  offset=14, length=4,
+                                                                  field_type=FieldType.Binary,
+                                                                  value=executed_quantity)
+        self._field_specs[FieldName.ExecutionId] = FieldSpec(field_name=FieldName.ExecutionId,
+                                                             offset=18, length=8,
+                                                             field_type=FieldType.Binary,
+                                                             value=execution_id)
+
