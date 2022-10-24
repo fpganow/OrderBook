@@ -1,3 +1,4 @@
+from typing import List
 from hamcrest import (
     assert_that,
     equal_to,
@@ -14,6 +15,12 @@ from pitch.pitch42 import (
 
 
 logger = logging.getLogger(__name__)
+
+
+def dump_msg_bytes(msg_bytes: List[int]) -> None:
+    print('\n')
+    for idx, byte_i in enumerate(msg_bytes):
+        print(f' [{idx}] = {byte_i}')
 
 
 class TestSeqUnitHeader(TestCase):
@@ -85,9 +92,8 @@ class TestAddOrder(TestCase):
 
         # THEN
         assert_that(msg_bytes, has_length(34))
-        print('\n')
-        for idx, byte_i in enumerate(msg_bytes):
-            print(f' [{idx}] = {byte_i}')
+        dump_msg_bytes(msg_bytes)
+
         assert_that(msg_bytes, equal_to(bytearray([
             0x22,  # Length
             0x21,  # Type
@@ -99,6 +105,12 @@ class TestAddOrder(TestCase):
             0x5A, 0x23, 0, 0, 0, 0, 0, 0,  # Price
             0x01  # AddBitField
         ])))
+
+    def test_add_order_short(self):
+        pass
+
+    def test_add_order_expanded(self):
+        pass
 
 
 class TestOrderExecuted(TestCase):
@@ -114,9 +126,8 @@ class TestOrderExecuted(TestCase):
 
         # THEN
         assert_that(msg_bytes, has_length(26))
-        print('\n')
-        for idx, byte_i in enumerate(msg_bytes):
-            print(f' [{idx}] = {byte_i}')
+        dump_msg_bytes(msg_bytes)
+
         assert_that(msg_bytes, equal_to(bytearray([
             0x1A,  # Length
             0x23,  # Type
@@ -126,3 +137,37 @@ class TestOrderExecuted(TestCase):
             0x45, 0x58, 0x45, 0x49, 0x44, 0x30, 0x30, 0x31,  # Execution Id
         ])))
 
+    def test_order_executed_at_price_size(self):
+        pass
+
+
+class ReduceSize(TestCase):
+    def test_reduce_size_long(self):
+        pass
+
+    def test_reduce_size_short(self):
+        pass
+
+
+class Modify(TestCase):
+    def test_modify_long(self):
+        pass
+
+    def test_modify_short(self):
+        pass
+
+
+class DeleteOrder(TestCase):
+    def test_delete_order(self):
+        pass
+
+
+class Trade(TestCase):
+    def test_trade_long(self):
+        pass
+
+    def test_trade_short(self):
+        pass
+
+    def test_trade_expanded(self):
+        pass

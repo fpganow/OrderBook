@@ -131,7 +131,7 @@
 					<Item Name="filter.test.AddOrder.Once.vi" Type="VI" URL="../host/filter/tests/filter.test.AddOrder.Once.vi"/>
 					<Item Name="filter.test.AddOrder.Once.FilteredOut.vi" Type="VI" URL="../host/filter/tests/filter.test.AddOrder.Once.FilteredOut.vi"/>
 					<Item Name="filter.test.AddOrder.3.of.2.tickers.vi" Type="VI" URL="../host/filter/tests/filter.test.AddOrder.3.of.2.tickers.vi"/>
-					<Item Name="filter.test.AddOrder.and.ModifyOrder.vi" Type="VI" URL="../host/filter/tests/filter.test.AddOrder.and.ModifyOrder.vi"/>
+					<Item Name="filter.test.AddOrder.and.OrderExecuted.vi" Type="VI" URL="../host/filter/tests/filter.test.AddOrder.and.OrderExecuted.vi"/>
 				</Item>
 				<Item Name="filter.run.all.hostToFpga.tests.vi" Type="VI" URL="../host/filter/filter.run.all.hostToFpga.tests.vi"/>
 				<Item Name="filter.hostToFpga.testRunner.vi" Type="VI" URL="../host/filter/filter.hostToFpga.testRunner.vi">
