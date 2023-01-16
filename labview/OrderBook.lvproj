@@ -143,7 +143,7 @@
 					<Item Name="create.TradeLong.vi" Type="VI" URL="../host/bats.parser/pitch/create.TradeLong.vi"/>
 					<Item Name="create.TradeShort.vi" Type="VI" URL="../host/bats.parser/pitch/create.TradeShort.vi"/>
 					<Item Name="create.TradeExpanded.vi" Type="VI" URL="../host/bats.parser/pitch/create.TradeExpanded.vi"/>
-					<Item Name="create.addOrderLong.vi" Type="VI" URL="../host/bats.parser/pitch/create.addOrderLong.vi"/>
+					<Item Name="create.AddOrderLong.vi" Type="VI" URL="../host/bats.parser/pitch/create.AddOrderLong.vi"/>
 					<Item Name="create.AddOrderShort.vi" Type="VI" URL="../host/bats.parser/pitch/create.AddOrderShort.vi"/>
 					<Item Name="create.AddOrderExpanded.vi" Type="VI" URL="../host/bats.parser/pitch/create.AddOrderExpanded.vi"/>
 					<Item Name="create.OrderExecuted.vi" Type="VI" URL="../host/bats.parser/pitch/create.OrderExecuted.vi"/>
@@ -196,6 +196,7 @@
 					<Item Name="filter.test.Delete.Only.Order.vi" Type="VI" URL="../host/filter/tests/filter.test.Delete.Only.Order.vi"/>
 					<Item Name="filter.test.Delete.1st.of.2.Orders.vi" Type="VI" URL="../host/filter/tests/filter.test.Delete.1st.of.2.Orders.vi"/>
 					<Item Name="filter.test.Delete.2nd.of.2.Orders.vi" Type="VI" URL="../host/filter/tests/filter.test.Delete.2nd.of.2.Orders.vi"/>
+					<Item Name="filter.test.Delete.2nd.of.5.Orders.vi" Type="VI" URL="../host/filter/tests/filter.test.Delete.2nd.of.5.Orders.vi"/>
 				</Item>
 				<Item Name="create.watchlist.vi" Type="VI" URL="../host/filter/create.watchlist.vi"/>
 				<Item Name="filter.hostToFpgaTests.lvtest" Type="TestItem" URL="../host/filter/filter.hostToFpgaTests.lvtest">
@@ -864,7 +865,7 @@ PXIe_Clk100ResourceName=PXIe_Clk100;TopSignalConnect=PxieClk100;ClockSignalName=
             <RelativeToLabVIEW>Targets\NI\FPGA\RIO\79XXR\Common\CLIP\Routing\v1\MacallanDefaultRouting.xml</RelativeToLabVIEW>
             <RelativeToNiPubDocs>..\..\..\..\Program Files\National Instruments\LabVIEW 2022\Targets\NI\FPGA\RIO\79XXR\Common\CLIP\Routing\v1\MacallanDefaultRouting.xml</RelativeToNiPubDocs>
             <RelativeToNiSharedDir>LabVIEW 2022\Targets\NI\FPGA\RIO\79XXR\Common\CLIP\Routing\v1\MacallanDefaultRouting.xml</RelativeToNiSharedDir>
-            <RelativeToProject>..\..\..\..\Program Files\National Instruments\LabVIEW 2022\Targets\NI\FPGA\RIO\79XXR\Common\CLIP\Routing\v1\MacallanDefaultRouting.xml</RelativeToProject>
+            <RelativeToProject>C:\Program Files\National Instruments\LabVIEW 2022\Targets\NI\FPGA\RIO\79XXR\Common\CLIP\Routing\v1\MacallanDefaultRouting.xml</RelativeToProject>
             <Valid>true</Valid>
          </DeclarationPaths>
          <Description></Description>
@@ -26747,6 +26748,15 @@ PXIe_Clk100ResourceName=PXIe_Clk100;TopSignalConnect=PxieClk100;ClockSignalName=
 					<Item Name="niInstr IPv4 Data Stream v1.lvclass" Type="LVClass" URL="/&lt;instrlib&gt;/_niInstr/Network/IPv4/Data Stream/v1/niInstr IPv4 Data Stream v1.lvclass"/>
 					<Item Name="niInstr IPv4 UDP FPGA v1.lvlib" Type="Library" URL="/&lt;instrlib&gt;/_niInstr/Network/IPv4/UDP/FPGA/v1/niInstr IPv4 UDP FPGA v1.lvlib"/>
 					<Item Name="niInstr IPv4 UDP Data Stream v1.lvclass" Type="LVClass" URL="/&lt;instrlib&gt;/_niInstr/Network/IPv4/UDP/Data Stream/v1/niInstr IPv4 UDP Data Stream v1.lvclass"/>
+					<Item Name="xsimkC792537791DE412E8810E138F5BC4696.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Private/DblSyncBEResetSimFiles/xsim.dir/DoubleSyncBasicElements/xsimkC792537791DE412E8810E138F5BC4696.dll"/>
+					<Item Name="xsimk0B830B7E81994019B09E50CE7A175B36.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Private/DFlopBEResetSimFiles/xsim.dir/DFlopBasicElementsIpin/xsimk0B830B7E81994019B09E50CE7A175B36.dll"/>
+					<Item Name="xsimk18D0B73362694A2E9998AFAB1AE6DA4E.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Private/Ff_DT_256bSimFiles/xsim.dir/FfWithDontTouchIpin/xsimk18D0B73362694A2E9998AFAB1AE6DA4E.dll"/>
+					<Item Name="xsimkA074E5CBA86845FEB050DBB8BF0F3AFB.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Private/Ff_DT_512bSimFiles/xsim.dir/FfWithDontTouchIpin/xsimkA074E5CBA86845FEB050DBB8BF0F3AFB.dll"/>
+					<Item Name="xsimkE0EDB5E65B8B49DD8E163F5688E824C1.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Public/ModGen/ff_max_fanout_4SimFiles/xsim.dir/MaxFanoutFf/xsimkE0EDB5E65B8B49DD8E163F5688E824C1.dll"/>
+					<Item Name="xsimk6A315D12FBC743E4ACD121A1951E87AC.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Public/ModGen/ff_max_fanout_8SimFiles/xsim.dir/MaxFanoutFf/xsimk6A315D12FBC743E4ACD121A1951E87AC.dll"/>
+					<Item Name="xsimk36915C3B0A964A738AD3121E87CF92C2.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Public/ModGen/ff_max_fanout_16SimFiles/xsim.dir/MaxFanoutFf/xsimk36915C3B0A964A738AD3121E87CF92C2.dll"/>
+					<Item Name="xsimk417FC7712F0F4A3C95450BAF224B3F38.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Public/ModGen/ff_max_fanout_32SimFiles/xsim.dir/MaxFanoutFf/xsimk417FC7712F0F4A3C95450BAF224B3F38.dll"/>
+					<Item Name="xsimkB15BA4892E5F4023A51AA2E61B6FD011.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Private/GlitchlessMux_4InputSimFiles/xsim.dir/FourInputGlitchFreeMuxBasicElements/xsimkB15BA4892E5F4023A51AA2E61B6FD011.dll"/>
 				</Item>
 			</Item>
 			<Item Name="Build Specifications" Type="Build">
