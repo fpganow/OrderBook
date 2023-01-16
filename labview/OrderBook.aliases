@@ -1,5 +1,5 @@
 [My Computer]
-My Computer = "172.28.96.1"
+My Computer = "172.27.96.1"
 
 [RT CompactDAQ Target]
 RT CompactDAQ Target = "0.0.0.0"

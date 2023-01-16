@@ -143,7 +143,7 @@
 					<Item Name="create.TradeLong.vi" Type="VI" URL="../host/bats.parser/pitch/create.TradeLong.vi"/>
 					<Item Name="create.TradeShort.vi" Type="VI" URL="../host/bats.parser/pitch/create.TradeShort.vi"/>
 					<Item Name="create.TradeExpanded.vi" Type="VI" URL="../host/bats.parser/pitch/create.TradeExpanded.vi"/>
-					<Item Name="create.AddOrderLong.vi" Type="VI" URL="../host/bats.parser/pitch/create.AddOrderLong.vi"/>
+					<Item Name="create.addOrderLong.vi" Type="VI" URL="../host/bats.parser/pitch/create.addOrderLong.vi"/>
 					<Item Name="create.AddOrderShort.vi" Type="VI" URL="../host/bats.parser/pitch/create.AddOrderShort.vi"/>
 					<Item Name="create.AddOrderExpanded.vi" Type="VI" URL="../host/bats.parser/pitch/create.AddOrderExpanded.vi"/>
 					<Item Name="create.OrderExecuted.vi" Type="VI" URL="../host/bats.parser/pitch/create.OrderExecuted.vi"/>
@@ -194,6 +194,8 @@
 					<Item Name="filter.test.AddOrder.and.OrderExecuted.vi" Type="VI" URL="../host/filter/tests/filter.test.AddOrder.and.OrderExecuted.vi"/>
 					<Item Name="filter.test.AddOrder.and.OrderExecuted.Pass.Through.vi" Type="VI" URL="../host/filter/tests/filter.test.AddOrder.and.OrderExecuted.Pass.Through.vi"/>
 					<Item Name="filter.test.Delete.Only.Order.vi" Type="VI" URL="../host/filter/tests/filter.test.Delete.Only.Order.vi"/>
+					<Item Name="filter.test.Delete.1st.of.2.Orders.vi" Type="VI" URL="../host/filter/tests/filter.test.Delete.1st.of.2.Orders.vi"/>
+					<Item Name="filter.test.Delete.2nd.of.2.Orders.vi" Type="VI" URL="../host/filter/tests/filter.test.Delete.2nd.of.2.Orders.vi"/>
 				</Item>
 				<Item Name="create.watchlist.vi" Type="VI" URL="../host/filter/create.watchlist.vi"/>
 				<Item Name="filter.hostToFpgaTests.lvtest" Type="TestItem" URL="../host/filter/filter.hostToFpgaTests.lvtest">
@@ -862,7 +864,7 @@ PXIe_Clk100ResourceName=PXIe_Clk100;TopSignalConnect=PxieClk100;ClockSignalName=
             <RelativeToLabVIEW>Targets\NI\FPGA\RIO\79XXR\Common\CLIP\Routing\v1\MacallanDefaultRouting.xml</RelativeToLabVIEW>
             <RelativeToNiPubDocs>..\..\..\..\Program Files\National Instruments\LabVIEW 2022\Targets\NI\FPGA\RIO\79XXR\Common\CLIP\Routing\v1\MacallanDefaultRouting.xml</RelativeToNiPubDocs>
             <RelativeToNiSharedDir>LabVIEW 2022\Targets\NI\FPGA\RIO\79XXR\Common\CLIP\Routing\v1\MacallanDefaultRouting.xml</RelativeToNiSharedDir>
-            <RelativeToProject>C:\Program Files\National Instruments\LabVIEW 2022\Targets\NI\FPGA\RIO\79XXR\Common\CLIP\Routing\v1\MacallanDefaultRouting.xml</RelativeToProject>
+            <RelativeToProject>..\..\..\..\Program Files\National Instruments\LabVIEW 2022\Targets\NI\FPGA\RIO\79XXR\Common\CLIP\Routing\v1\MacallanDefaultRouting.xml</RelativeToProject>
             <Valid>true</Valid>
          </DeclarationPaths>
          <Description></Description>
@@ -26738,15 +26740,6 @@ PXIe_Clk100ResourceName=PXIe_Clk100;TopSignalConnect=PxieClk100;ClockSignalName=
 				<Item Name="instr.lib" Type="Folder">
 					<Item Name="niInstr Network Types v1.lvlib" Type="Library" URL="/&lt;instrlib&gt;/_niInstr/Network/Types/v1/niInstr Network Types v1.lvlib"/>
 					<Item Name="niInstr Basic Elements v1 FPGA.lvlib" Type="Library" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/niInstr Basic Elements v1 FPGA.lvlib"/>
-					<Item Name="xsimkC792537791DE412E8810E138F5BC4696.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Private/DblSyncBEResetSimFiles/xsim.dir/DoubleSyncBasicElements/xsimkC792537791DE412E8810E138F5BC4696.dll"/>
-					<Item Name="xsimk0B830B7E81994019B09E50CE7A175B36.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Private/DFlopBEResetSimFiles/xsim.dir/DFlopBasicElementsIpin/xsimk0B830B7E81994019B09E50CE7A175B36.dll"/>
-					<Item Name="xsimk18D0B73362694A2E9998AFAB1AE6DA4E.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Private/Ff_DT_256bSimFiles/xsim.dir/FfWithDontTouchIpin/xsimk18D0B73362694A2E9998AFAB1AE6DA4E.dll"/>
-					<Item Name="xsimkA074E5CBA86845FEB050DBB8BF0F3AFB.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Private/Ff_DT_512bSimFiles/xsim.dir/FfWithDontTouchIpin/xsimkA074E5CBA86845FEB050DBB8BF0F3AFB.dll"/>
-					<Item Name="xsimkE0EDB5E65B8B49DD8E163F5688E824C1.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Public/ModGen/ff_max_fanout_4SimFiles/xsim.dir/MaxFanoutFf/xsimkE0EDB5E65B8B49DD8E163F5688E824C1.dll"/>
-					<Item Name="xsimk6A315D12FBC743E4ACD121A1951E87AC.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Public/ModGen/ff_max_fanout_8SimFiles/xsim.dir/MaxFanoutFf/xsimk6A315D12FBC743E4ACD121A1951E87AC.dll"/>
-					<Item Name="xsimk36915C3B0A964A738AD3121E87CF92C2.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Public/ModGen/ff_max_fanout_16SimFiles/xsim.dir/MaxFanoutFf/xsimk36915C3B0A964A738AD3121E87CF92C2.dll"/>
-					<Item Name="xsimk417FC7712F0F4A3C95450BAF224B3F38.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Public/ModGen/ff_max_fanout_32SimFiles/xsim.dir/MaxFanoutFf/xsimk417FC7712F0F4A3C95450BAF224B3F38.dll"/>
-					<Item Name="xsimkB15BA4892E5F4023A51AA2E61B6FD011.dll" Type="Document" URL="/&lt;instrlib&gt;/_niInstr/Basic Elements/v1/FPGA/Private/GlitchlessMux_4InputSimFiles/xsim.dir/FourInputGlitchFreeMuxBasicElements/xsimkB15BA4892E5F4023A51AA2E61B6FD011.dll"/>
 					<Item Name="niInstr Ethernet MAC Raw Stream v1.lvclass" Type="LVClass" URL="/&lt;instrlib&gt;/_niInstr/Network/Ethernet/MAC/Raw Stream/v1/niInstr Ethernet MAC Raw Stream v1.lvclass"/>
 					<Item Name="niInstr Ethernet Utilities FPGA v1.lvlib" Type="Library" URL="/&lt;instrlib&gt;/_niInstr/Network/Ethernet/Utility/v1/FPGA/niInstr Ethernet Utilities FPGA v1.lvlib"/>
 					<Item Name="niInstr Ethernet MAC Data Stream v1.lvclass" Type="LVClass" URL="/&lt;instrlib&gt;/_niInstr/Network/Ethernet/MAC/Data Stream/v1/niInstr Ethernet MAC Data Stream v1.lvclass"/>
@@ -26755,7 +26748,6 @@ PXIe_Clk100ResourceName=PXIe_Clk100;TopSignalConnect=PxieClk100;ClockSignalName=
 					<Item Name="niInstr IPv4 UDP FPGA v1.lvlib" Type="Library" URL="/&lt;instrlib&gt;/_niInstr/Network/IPv4/UDP/FPGA/v1/niInstr IPv4 UDP FPGA v1.lvlib"/>
 					<Item Name="niInstr IPv4 UDP Data Stream v1.lvclass" Type="LVClass" URL="/&lt;instrlib&gt;/_niInstr/Network/IPv4/UDP/Data Stream/v1/niInstr IPv4 UDP Data Stream v1.lvclass"/>
 				</Item>
-				<Item Name="old.test.data.in.ctl" Type="VI" URL="../test/old.test.data.in.ctl"/>
 			</Item>
 			<Item Name="Build Specifications" Type="Build">
 				<Item Name="bats.parser.ip" Type="{F4C5E96F-7410-48A5-BB87-3559BC9B167F}">
@@ -26915,12 +26907,16 @@ PXIe_Clk100ResourceName=PXIe_Clk100;TopSignalConnect=PxieClk100;ClockSignalName=
 				<Item Name="Trim Whitespace One-Sided.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace One-Sided.vi"/>
 				<Item Name="Error Cluster From Error Code.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Error Cluster From Error Code.vi"/>
 				<Item Name="NI_Data Type.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/Data Type/NI_Data Type.lvlib"/>
-				<Item Name="Type Desc Enum.ctl" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Controls/Type Desc Enum.ctl"/>
-				<Item Name="Name from Type Desc.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Name from Type Desc.vi"/>
-				<Item Name="Type Desc Enum Strings.ctl" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Controls/Type Desc Enum Strings.ctl"/>
 				<Item Name="Get Cluster Element Names.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Get Cluster Element Names.vi"/>
+				<Item Name="Index Cluster (by Name).vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Index Cluster (by Name).vi"/>
+				<Item Name="XControlSupport.lvlib" Type="Library" URL="/&lt;vilib&gt;/_xctls/XControlSupport.lvlib"/>
+				<Item Name="Version To Dotted String.vi" Type="VI" URL="/&lt;vilib&gt;/_xctls/Version To Dotted String.vi"/>
+				<Item Name="Get or Set Cluster Element (by Name).vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Get or Set Cluster Element (by Name).vi"/>
+				<Item Name="Type Desc Enum.ctl" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Controls/Type Desc Enum.ctl"/>
 				<Item Name="Cluster to Array of Variants.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Cluster to Array of Variants.vi"/>
+				<Item Name="Type Desc Enum Strings.ctl" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Controls/Type Desc Enum Strings.ctl"/>
 				<Item Name="Get Object Type.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Get Object Type.vi"/>
+				<Item Name="Name from Type Desc.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Name from Type Desc.vi"/>
 				<Item Name="Get Object Name.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Get Object Name.vi"/>
 				<Item Name="VArray Size.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/VArray Size.vi"/>
 				<Item Name="Number of Cluster Elements in Array Element.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Number of Cluster Elements in Array Element.vi"/>
@@ -26929,46 +26925,42 @@ PXIe_Clk100ResourceName=PXIe_Clk100;TopSignalConnect=PxieClk100;ClockSignalName=
 				<Item Name="Calculate Index (1D).vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Calculate Index (1D).vi"/>
 				<Item Name="Get Cluster Element Data Types.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Get Cluster Element Data Types.vi"/>
 				<Item Name="Index Cluster.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Index Cluster.vi"/>
-				<Item Name="Index Cluster (by Name).vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Index Cluster (by Name).vi"/>
-				<Item Name="XControlSupport.lvlib" Type="Library" URL="/&lt;vilib&gt;/_xctls/XControlSupport.lvlib"/>
-				<Item Name="Version To Dotted String.vi" Type="VI" URL="/&lt;vilib&gt;/_xctls/Version To Dotted String.vi"/>
-				<Item Name="Name to Type Desc.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Name to Type Desc.vi"/>
+				<Item Name="Get Cluster Element (by Name).vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Get Cluster Element (by Name).vi"/>
+				<Item Name="Cluster Index Error.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Cluster Index Error.vi"/>
+				<Item Name="Array Index from String.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Array Index from String.vi"/>
+				<Item Name="Is Integer Check.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Is Integer Check.vi"/>
+				<Item Name="Get or Set Cluster Element.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Get or Set Cluster Element.vi"/>
 				<Item Name="Wrap Object In Cluster.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Wrap Object In Cluster.vi"/>
-				<Item Name="Set Object Name.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Set Object Name.vi"/>
-				<Item Name="Insert Into Cluster.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Insert Into Cluster.vi"/>
-				<Item Name="Prepend Cluster.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Prepend Cluster.vi"/>
-				<Item Name="Delete From Cluster.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Delete From Cluster.vi"/>
-				<Item Name="Number of Cluster Elements.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Number of Cluster Elements.vi"/>
-				<Item Name="Replace Cluster Subset.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Replace Cluster Subset.vi"/>
+				<Item Name="Name to Type Desc.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Name to Type Desc.vi"/>
+				<Item Name="Get Cluster or Array Element.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Get Cluster or Array Element.vi"/>
+				<Item Name="Array Subtype and Size.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Array Subtype and Size.vi"/>
+				<Item Name="Type &amp; Subtype Check.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Type &amp; Subtype Check.vi"/>
+				<Item Name="Object Type &amp; Subtype Check.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Object Type &amp; Subtype Check.vi"/>
+				<Item Name="Waveform Subtype Code.ctl" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Controls/Waveform Subtype Code.ctl"/>
+				<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
+				<Item Name="Type Check Error Msg.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Type Check Error Msg.vi"/>
+				<Item Name="Enum Type Check.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Enum Type Check.vi"/>
+				<Item Name="Enum Type and Item Check.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Enum Type and Item Check.vi"/>
 				<Item Name="Name from Enum Desc.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Name from Enum Desc.vi"/>
 				<Item Name="Enum Type and Item Check (Type String).vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Enum Type and Item Check (Type String).vi"/>
-				<Item Name="Enum Type and Item Check.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Enum Type and Item Check.vi"/>
-				<Item Name="Enum Type Check.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Enum Type Check.vi"/>
-				<Item Name="Type Check Error Msg.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Type Check Error Msg.vi"/>
-				<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
-				<Item Name="Waveform Subtype Code.ctl" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Controls/Waveform Subtype Code.ctl"/>
 				<Item Name="Object Type (String) &amp; Subtype Check.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Object Type (String) &amp; Subtype Check.vi"/>
-				<Item Name="Object Type &amp; Subtype Check.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Object Type &amp; Subtype Check.vi"/>
-				<Item Name="Type &amp; Subtype Check.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Type &amp; Subtype Check.vi"/>
+				<Item Name="Type Check Array Elements (All).vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Type Check Array Elements (All).vi"/>
 				<Item Name="Type Check Cluster Elements (All).vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Type Check Cluster Elements (All).vi"/>
 				<Item Name="Replace Array Element.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Replace Array Element.vi"/>
-				<Item Name="Type Check Array Elements (All).vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Type Check Array Elements (All).vi"/>
-				<Item Name="Array Subtype and Size.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Array Subtype and Size.vi"/>
-				<Item Name="Get Cluster or Array Element.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Get Cluster or Array Element.vi"/>
-				<Item Name="Get or Set Cluster Element.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Get or Set Cluster Element.vi"/>
-				<Item Name="Is Integer Check.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Is Integer Check.vi"/>
-				<Item Name="Array Index from String.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Array Index from String.vi"/>
-				<Item Name="Cluster Index Error.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Cluster Index Error.vi"/>
-				<Item Name="Get Cluster Element (by Name).vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Get Cluster Element (by Name).vi"/>
-				<Item Name="Get or Set Cluster Element (by Name).vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Get or Set Cluster Element (by Name).vi"/>
+				<Item Name="Set Object Name.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Set Object Name.vi"/>
+				<Item Name="Replace Cluster Subset.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Replace Cluster Subset.vi"/>
+				<Item Name="Number of Cluster Elements.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Number of Cluster Elements.vi"/>
+				<Item Name="Delete From Cluster.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Delete From Cluster.vi"/>
+				<Item Name="Prepend Cluster.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/_SubVIs/Prepend Cluster.vi"/>
+				<Item Name="Insert Into Cluster.vi" Type="VI" URL="/&lt;vilib&gt;/Autotestware/Cluster Toolkit/Insert Into Cluster.vi"/>
 			</Item>
-			<Item Name="orderbook.command.type.ctl" Type="VI" URL="../fpga/common/orderbook.command.type.ctl"/>
-			<Item Name="orderbook.command.ctl" Type="VI" URL="../fpga/common/orderbook.command.ctl"/>
-			<Item Name="orderbook.result.type.ctl" Type="VI" URL="../fpga/app/orderbook.result.type.ctl"/>
-			<Item Name="orderbook.entry.ctl" Type="VI" URL="../fpga/app/orderbook.entry.ctl"/>
 			<Item Name="NiFpgaLv.dll" Type="Document" URL="NiFpgaLv.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
+			<Item Name="orderbook.command.ctl" Type="VI" URL="../fpga/common/orderbook.command.ctl"/>
+			<Item Name="orderbook.command.type.ctl" Type="VI" URL="../fpga/common/orderbook.command.type.ctl"/>
+			<Item Name="orderbook.result.type.ctl" Type="VI" URL="../fpga/app/orderbook.result.type.ctl"/>
+			<Item Name="orderbook.entry.ctl" Type="VI" URL="../fpga/app/orderbook.entry.ctl"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="My Application" Type="EXE">
